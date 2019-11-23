@@ -2,7 +2,9 @@ package com.qst.ssm.service.impl;
 
 
 import com.qst.ssm.dao.IAdminDao;
+import com.qst.ssm.dao.IProductDao;
 import com.qst.ssm.entity.Admin;
+import com.qst.ssm.entity.Product;
 import com.qst.ssm.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,7 +19,9 @@ public class AdminServiceImpl implements IAdminService{
     @Autowired
     @Qualifier("adminDao")
     private IAdminDao adminDao;
-
+    @Autowired
+    @Qualifier("productDao")
+    private IProductDao productDao;
     @Override
     @Transactional(propagation = Propagation.NEVER )
     public List<Admin> queryAdmin() {
@@ -52,5 +56,34 @@ public class AdminServiceImpl implements IAdminService{
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public int updatepass(int adminId) {
         return 0;
+    }
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public List<Product> queryProduct() {
+        return productDao.queryProduct();
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public Product getProduct(int pdId) {
+        return productDao.getProduct(pdId);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public int insertProduct(Product product) {
+        return productDao.insertProduct(product);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public int deleteProduct(int pdId) {
+        return productDao.deleteProduct(pdId);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public int updateProduct(Product product) {
+        return productDao.updateProduct(product);
     }
 }

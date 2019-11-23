@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qst.ssm.mapper.ProductMapper">
+    <!-- 查询所有商品-->
+    <select id="queryProduct" resultType="product">
+        <![CDATA[
+        select
+            pd_id as pdId,
+            pd_three_id as pdthreeId,
+            pd_no as pdNo,
+            pd_name as pdName,
+            pd_price as pdPrice,
+            pd_cover as pdCover,
+            pd_date as pdDate
+        from
+            product
+        ]]>
+    </select>
+    <!-- 根据商品ID加载商品信息-->
+    <select id="getProduct"  resultType="product" parameterType="int">
+        <![CDATA[
+        select
+            pd_id as pdId,
+            pd_three_id as pdthreeId,
+            pd_no as pdNo,
+            pd_name as pdName,
+            pd_price as pdPrice,
+            pd_cover as pdCover,
+            pd_date as pdDate
+        from
+            product
+        where pd_id=#{pdId}
+       ]]>
+    </select>
+    <!-- 添加商品-->
+    <insert id="insertProduct" parameterType="product">
+      <![CDATA[
+        insert into t_emp (
+            pd_three_id as pdthreeId,
+            pd_no as pdNo,
+            pd_name as pdName,
+            pd_price as pdPrice,
+            pd_cover as pdCover,
+            pd_date as pdDate
+        )
+        values
+        (
+            #{pdthreeId},
+            #{pdNo},
+            #{pdName},
+            #{pdPrice},
+            #{pdCover},
+            #{pdDate}
+         )
+      ]]>
+    </insert>
+    <!-- 根据商品ID删除商品记录-->
+    <delete id="deleteProduct" parameterType="int">
+        <![CDATA[
+        delete from product where pd_id=#{pdId}
+      ]]>
+    </delete>
+     <!--根据商品ID修改商品信息-->
+    <update id="updateProduct" parameterType="product">
+    <![CDATA[
+        update  product
+        set     pd_three_id =#{pdthreeId},
+                pd_name =#{pdName},
+                pd_price =#{pdPrice},
+                pd_cover =#{pdCover},
+                pd_date =#{pdDate}
+        where pd_id=#{pdId}
+     ]]>
+    </update>
+</mapper>

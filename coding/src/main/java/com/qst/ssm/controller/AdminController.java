@@ -1,6 +1,7 @@
 package com.qst.ssm.controller;
 
 import com.qst.ssm.entity.Admin;
+import com.qst.ssm.entity.Product;
 import com.qst.ssm.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -103,4 +104,18 @@ public class AdminController {
         int rows =adminService.updateAdmin(admin);
         return "redirect:/admin/update_admin_result.jsp?rows="+rows;
     }
+
+    @RequestMapping(value = "load_product",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public Map<String,Object> loadProduct(@RequestParam("pd_id") int pdId){
+        Product product=adminService.getProduct(pdId);
+        Map<String,Object> dataMap=new HashMap<>();
+        dataMap.put("product",product);
+        return dataMap;
+    }
+    @RequestMapping("updateproduct")
+    public String updateProduct(Product product){
+        int rows=adminService.updateProduct(product);
+        return "redirect:/product/update_product_result.jsp?rows="+rows;
+    };
 }
