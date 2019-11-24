@@ -19,6 +19,13 @@ public interface IClassificationService {
     List<Map> queryClassification();
 
     /**
+     * 根据编号或名称查询一级分类
+     * @param classification
+     * @return
+     */
+    List<Classification> queryClassificationByNoOrName(Classification classification);
+
+    /**
      * 根据一级Id查询一级分类信息
      * @return
      */

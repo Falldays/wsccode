@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -31,7 +32,7 @@
                         <div class="col-sm-1 text-right">
                             <span>一级:</span>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <select name="oneId" id="selectOne" class="form-control"  >
                                 <option value="">--请选择--</option>
                                 <c:forEach items="${requestScope.oneClassificationList}" var="classification">
@@ -45,7 +46,7 @@
                         <div class="col-sm-1 text-right">
                             <span>二级:</span>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <select name="twoId" id="selectTwo" class="form-control">
                                 <option value="">--请选择--</option>
                             </select>
@@ -55,7 +56,7 @@
                         <div class="col-sm-1 text-right">
                             <span>三级:</span>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <select name="twoId" id="selectThree" class="form-control">
                                 <option value="">--请选择--</option>
                             </select>
@@ -78,16 +79,19 @@
             <thead>
             <tr class="info">
                 <th class="text-center">
-                    <span>二级分类编号</span>
+                    <span>三级分类编号</span>
                 </th>
                 <th class="text-center">
-                    <span>二级分类名称</span>
+                    <span>三级分类名称</span>
+                </th>
+                <th class="text-center">
+                    <span>所属分类（二级）</span>
                 </th>
                 <th class="text-center">
                     <span>所属分类（一级）</span>
                 </th>
                 <th class="text-center">
-                    <span>对应三级分类数</span>
+                    <span>对应商品数</span>
                 </th>
                 <th class="text-center">
                     <span>操作</span>
@@ -96,15 +100,16 @@
             </thead>
             <tbody>
             <c:choose>
-                <c:when test="${ empty requestScope.twoClassificationListBy}">
+                <c:when test="${ empty requestScope.threeClassificationListBy}">
                     <tr>
                         <td colspan="7" align="center"><span style="color: #0000FF">未查询到数据</span></td>
                     </tr>
                 </c:when>
                 <c:otherwise>
-                    <c:forEach items="${requestScope.twoClassificationListBy}" var="classification">
+                    <c:forEach items="${requestScope.threeClassificationListBy}" var="classification">
                         <tr>
-                            <td align="center">${classification.twoNo}</td>
+                            <td align="center">${classification.threeNo}</td>
+                            <td align="center">${classification.threeName}</td>
                             <td align="center">${classification.twoName}</td>
                             <td align="center">${classification.oneName}</td>
                             <td align="center">${classification.number}</td>
