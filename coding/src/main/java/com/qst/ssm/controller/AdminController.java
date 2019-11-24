@@ -118,4 +118,31 @@ public class AdminController {
         int rows=adminService.updateProduct(product);
         return "redirect:/product/update_product_result.jsp?rows="+rows;
     };
+    /**
+     * 添加商品
+     * @param product
+     * @return
+     */
+    @RequestMapping("addproduct")
+    public String addProduct(Product product){
+        int rows=adminService.insertProduct(product);
+        return "redirect:/product/add_product_result.jsp?rows="+rows;
+    };
+
+    /**
+     * 查询商品
+     * @param model
+     * @return
+     */
+    @RequestMapping("queryproduct")
+    public String productQuery(Model model){
+        List<Product> productList=adminService.queryProduct();
+        model.addAttribute("productList", productList);
+        return "/product/query_product.jsp";
+    };
+    @RequestMapping("deleteproduct")
+    public String productDelete(@RequestParam("pd_id")int pdId){
+        int rows=adminService.deleteProduct(pdId);
+        return "redirect:/product/delete_product_result.jsp?rows="+rows;
+    };
 }

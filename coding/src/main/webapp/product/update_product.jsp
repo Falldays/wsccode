@@ -54,7 +54,7 @@
         <li><h3>修改商品</h3></li>
         <li>商品编号:<input type="text" name="pdNo" required ></li>
         <li>商品名称:<input type="text" name="pdName" required></li>
-        <li>商品分类:<input type="text" name="pdthreeId" required></li>
+        <li>商品三级分类ID:<input type="text" name="pdthreeId" required></li>
         <li>入库时间:<input type="date" name="pdDate" required></li>
         <li>价格:<input type="number" name="pdPrice" required></li>
         <%--<li><div>图片:<input type="text" name="pdCover"><image id="img01"/></div></li>--%>

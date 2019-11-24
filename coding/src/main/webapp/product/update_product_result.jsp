@@ -23,7 +23,7 @@
         <span style="color:rgb(219,99,48)">修改员工,服务器返回未知的状态</span>
     </c:otherwise>
 </c:choose>
-<a href="#">返回查询页面</a>
-<a href="/index.html">返回主页面</a>
+<a href="/admin/queryproduct">返回查询页面</a>
+
 </body>
 </html>
