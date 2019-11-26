@@ -55,9 +55,9 @@
             <li><cite></cite>
                 <a href="classification/queryClassification" target="rightFrame">一级分类</a><i></i></li>
             <li><cite></cite>
-                <a href="post/query_post.html" target="rightFrame">二级分类</a><i></i></li>
+                <a href="classification/queryTwoClassification" target="rightFrame">二级分类</a><i></i></li>
             <li><cite></cite>
-                <a href="post/query_post.html" target="rightFrame">三级分类</a><i></i></li>
+                <a href="classification/queryThreeClassification" target="rightFrame">三级分类</a><i></i></li>
         </ul>
     </dd>
     <dd>

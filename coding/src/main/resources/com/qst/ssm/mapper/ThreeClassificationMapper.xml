@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qst.ssm.mapper.ThreeClassificationMapper">
+    
+    <!--根据二级分类ID查询所有三级分类信息 -->
+    <select id="queryClassificationByThree" resultType="three" parameterType="Integer" >
+    <![CDATA[
+        SELECT
+            pd_three_id AS pd_threeId,
+            pd_three_no AS pd_threeNo,
+            pd_three_name AS pd_threeName,
+            pd_two_id AS pd_twoId
+        FROM
+            j_three_classification
+        WHERE
+            pd_two_id = #{twoId};
+    ]]>
+    </select>
+
+    <!--根据三级ID查询一个三级分类详细信息-->
+    <select id="queryThreeByThreeId" resultType="three" parameterType="Integer" >
+    <![CDATA[
+        SELECT
+            pd_three_id AS pd_threeId,
+            pd_three_no AS pd_threeNo,
+            pd_three_name AS pd_threeName,
+            pd_two_id AS pd_twoId
+        FROM
+            j_three_classification
+        WHERE
+            pd_three_id = #{threeId};
+    ]]>
+    </select>
+
+    <!--根据二级id和三级名称查询三级分类信息-->
+    <select id="queryThreeByTwoIdAndThreeName" parameterType="three" resultType="three">
+        <![CDATA[
+        SELECT
+            pd_three_id AS pd_threeId,
+            pd_three_no AS pd_threeNo,
+            pd_three_name AS pd_threeName,
+            pd_two_id AS pd_twoId
+        FROM
+            j_three_classification
+        WHERE
+        pd_three_name =#{pd_threeName} and pd_two_id =#{pd_twoId};
+        ]]>
+    </select>
+
+    <!--根据三级编号或三级名称查询三级信息-->
+    <select id="queryThreeByThreeNoOrThreeName" parameterType="three" resultType="three">
+        <![CDATA[
+            SELECT
+                pd_two_id as pd_twoId,
+                pd_three_id as pd_threeId,
+                pd_three_no as pd_threeNo,
+                pd_three_name as pd_threeName
+            FROM
+                j_three_classification
+            WHERE
+                pd_three_no = #{pd_threeNo}
+                OR ( pd_two_id =#{pd_twoId} AND pd_three_name=#{pd_threeName} );
+        ]]>
+    </select>
+
+
+
+    <!--添加三级分类-->
+    <insert id="addClassificationByThree" parameterType="three">
+        INSERT INTO j_three_classification(pd_three_no,pd_three_name,pd_two_id) VALUES(#{pd_threeNo},#{pd_threeName},#{pd_twoId});
+    </insert>
+
+
+    <!--删除某一个三级商品分类-->
+    <delete id="deleteClassificationByThree" parameterType="int">
+        DELETE FROM j_three_classification WHERE pd_three_id = #{threeId};
+    </delete>
+
+    <!--修改三级分类-->
+    <update id="updateThree" parameterType="three">
+        <![CDATA[
+        UPDATE j_three_classification set pd_three_name=#{pd_threeName} WHERE pd_three_id =#{pd_threeId};
+        ]]>
+    </update>
+
+    <!--查询所有类级分类 -->
+    <select id="getClassification" resultType="Map" parameterType="Map">
+    <![CDATA[
+    SELECT
+        twoThree.twoId as twoId,
+        twoThree.oneId as oneId,
+        twoThree.threeId as threeId,
+        twoThree.oneName as oneName,
+        twoThree.twoName as twoName,
+        twoThree.threeName as threeName,
+        twoThree.threeNo as threeNo,
+        COUNT(p.pd_three_id) as number
+    FROM
+        (
+        SELECT
+            oneTwo.pd_two_id AS twoId,
+            oneTwo.oneId AS oneId,
+            pd_three_id AS threeId,
+            oneTwo.cla_name AS oneName,
+            oneTwo.pd_two_name AS twoName,
+            pd_three_name AS threeName,
+            pd_three_no AS threeNo
+        FROM
+            (
+            SELECT
+                pd_two_id,
+                two.cla_fid AS oneId,
+                cla_name,
+                pd_two_name
+            FROM
+                j_classification AS one
+                INNER JOIN j_two_classification AS two ON one.cla_fid = two.cla_fid
+            ) AS oneTwo
+            INNER JOIN j_three_classification AS three ON oneTwo.pd_two_id = three.pd_two_id
+        ) AS twoThree
+        LEFT JOIN product AS p ON twoThree.threeId = p.pd_three_id GROUP BY twoThree.threeId
+        HAVING
+        1 = 1
+    ]]>
+        <if test="oneId!=null">
+            and   twoThree.oneId = #{oneId}
+        </if>
+        <if test="twoId!=null">
+            and    twoThree.twoId = #{twoId}
+        </if>
+        <if test="threeId!=null">
+            and   twoThree.threeId = #{threeId}
+        </if>
+    </select>
+
+
+    <!--按类级条件查询分类信息 -->
+    <select id="getClassificationByType" resultType="Map" parameterType="Map" >
+        <![CDATA[
+    SELECT
+        twoThree.twoId AS twoId,
+        twoThree.oneId AS oneId,
+        twoThree.threeId AS threeId,
+        twoThree.oneName AS oneName,
+        twoThree.twoName AS twoName,
+        twoThree.threeName AS threeName,
+        COUNT( p.pd_three_id ) AS number
+    FROM
+        (
+        SELECT
+            oneTwo.pd_two_id AS twoId,
+            oneTwo.oneId AS oneId,
+            pd_three_id AS threeId,
+            oneTwo.cla_name AS oneName,
+            oneTwo.pd_two_name AS twoName,
+            pd_three_name AS threeName
+        FROM
+            (
+            SELECT
+                pd_two_id,
+                two.cla_fid AS oneId,
+                cla_name,
+                pd_two_name
+            FROM
+                j_classification AS one
+                INNER JOIN j_two_classification AS two ON one.cla_fid = two.cla_fid
+            ) AS oneTwo
+            INNER JOIN j_three_classification AS three ON oneTwo.pd_two_id = three.pd_two_id
+        ) AS twoThree
+        LEFT JOIN product AS p ON twoThree.threeId = p.pd_three_id
+    GROUP BY
+        twoThree.threeId
+    HAVING
+        1 = 1
+]]>
+        <if test="oneId!=null">
+            and   twoThree.oneId = #{oneId}
+        </if>
+        <if test="twoId!=null">
+            and    twoThree.twoId = #{twoId}
+        </if>
+        <if test="threeId!=null">
+            and   twoThree.threeId = #{threeId}
+        </if>
+    </select>
+</mapper>

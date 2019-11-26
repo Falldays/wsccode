@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qst.ssm.mapper.TwoClassificationMapper">
+
+    <!--根据一级分类ID查询所有二级分类信息 -->
+    <select id="queryClassificationByTwo" resultType="two" parameterType="Integer">
+    <![CDATA[
+        SELECT
+            pd_two_id AS pd_twoId,
+            pd_two_no AS pd_twoNo,
+            pd_two_name AS pd_twoName,
+            cla_fid AS claFid
+        FROM
+            j_two_classification
+        WHERE
+            cla_fid = #{oneId};
+    ]]>
+    </select>
+
+    <!--根据二级id查询二级分类信息-->
+    <select id="queryTwoByTwoId" parameterType="int" resultType="two">
+        <![CDATA[
+        SELECT
+            pd_two_id AS pd_twoId,
+            pd_two_no AS pd_twoNo,
+            pd_two_name AS pd_twoName,
+            cla_fid AS claFid
+        FROM
+            j_two_classification
+        WHERE
+        pd_two_id =#{pd_twoId};
+        ]]>
+    </select>
+
+    <!--根据一级id和二级名称查询二级分类信息-->
+    <select id="queryTwoByOneIdAndTwoName" parameterType="two" resultType="two">
+        <![CDATA[
+        SELECT
+            pd_two_id AS pd_twoId,
+            pd_two_no AS pd_twoNo,
+            pd_two_name AS pd_twoName,
+            cla_fid AS claFid
+        FROM
+            j_two_classification
+        WHERE
+        pd_two_name =#{pd_twoName} and cla_fid =#{claFid};
+        ]]>
+    </select>
+
+    <!--根据二级编号或名称查询二级信息-->
+    <select id="queryTwoByNoOrName" parameterType="two" resultType="two">
+        <![CDATA[
+            SELECT
+                pd_two_id as pd_twoId,
+                pd_two_no as pd_twoNo,
+                pd_two_name as pd_twoName,
+                cla_fid as claFid
+            FROM
+                j_two_classification
+            WHERE
+                pd_two_no = #{pd_twoNo}
+                OR (pd_two_name = #{pd_twoName} AND cla_fid = #{claFid} );
+        ]]>
+    </select>
+
+    <!--查询二级分类信息，包括一级名、三级数量-->
+    <select id="queryTwoClassification" resultType="Map" parameterType="Map" >
+    <![CDATA[
+        SELECT
+            oneTwo.oneId as oneId,
+                oneTwo.cla_name as oneName,
+                oneTwo.twoId as twoId,
+                oneTwo.pd_two_no as twoNo,
+                oneTwo.pd_two_name  as twoName,
+                count(three.pd_two_id) as number
+        FROM
+            (
+            SELECT
+                one.cla_fid AS oneId,
+                cla_name,
+                pd_two_id AS twoId,
+                pd_two_no,
+                pd_two_name
+            FROM
+                j_classification AS one
+                INNER JOIN j_two_classification AS two ON one.cla_fid = two.cla_fid
+            ) AS oneTwo
+            LEFT JOIN j_three_classification AS three ON oneTwo.twoId = three.pd_two_id
+        GROUP BY
+            oneTwo.twoId
+    ]]>
+        <if test="oneId!=null or twoId!=null">
+            having
+        </if>
+        <if test="twoId!=null">
+            oneTwo.twoId=#{twoId}
+        </if>
+        <if test="twoId==null and oneId!=null">
+            oneTwo.oneId=#{oneId}
+        </if>
+    </select>
+
+
+    <!--添加二级分类-->
+    <insert id="addClassificationByTwo" parameterType="two">
+        INSERT INTO j_two_classification(pd_two_no,pd_two_name,cla_fid) VALUES(#{pd_twoNo},#{pd_twoName},#{claFid});
+    </insert>
+
+    <!--修改二级分类名称-->
+    <update id="updateTwo" parameterType="two">
+        UPDATE j_two_classification set pd_two_name = #{pd_twoName} where pd_two_id = #{pd_twoId};
+    </update>
+
+    <!--删除某一个二级商品分类-->
+    <delete id="deleteClassificationByTwo" parameterType="int">
+        DELETE FROM j_two_classification WHERE pd_two_id = #{twoId};
+    </delete>
+
+
+</mapper>

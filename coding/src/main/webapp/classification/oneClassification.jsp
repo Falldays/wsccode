@@ -17,8 +17,8 @@
     <script type="text/javascript" src="../res/bootstrap/js/jquery.min.js"></script>
     <script type="text/javascript" src="../res/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../res/My97DatePicker/WdatePicker.js"></script>
-</head>
 
+</head>
 <body>
 <ol class="breadcrumb">
     <li>当前位置:一级分类管理</li>
@@ -33,7 +33,7 @@
                             <select name="oneId" class="form-control">
                                 <option value="">--请选择--</option>
                                 <c:forEach items="${requestScope.oneClassificationList}" var="classification">
-                                        <option value="${classification.claFid}">${classification.claName}</option>
+                                    <option value="${classification.claFid}">${classification.claName}</option>
                                 </c:forEach>
 
                             </select>
@@ -41,8 +41,15 @@
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary"><span>查询</span></button>
-                        <a href="/classification/queryClassification"><button type="button" class="btn btn-primary" ><span>显示所有</span></button></a>
-                        <a href="#"><button type="button" class="btn btn-warning" ><span>添加一级分类</span></button></a>
+                        <a href="queryClassification"><button type="button" class="btn btn-primary" ><span>显示所有</span></button></a>
+                        <a href="../classification/addOne.jsp"><button type="button" class="btn btn-warning" ><span>添加一级分类</span></button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="left">
+                    <div class="col-sm-9 text-center" >
+                        <span style="color:rgb(255,0,0)">${requestScope.msg}</span>
                     </div>
                 </div>
             </div>
@@ -51,48 +58,68 @@
 </div>
 <div class="container">
     <%--<div class="form-signin" role="form">--%>
-        <div id="scrollContent" style="width: 99%">
-            <table class="table table-hover table-striped table-bordered">
-                <thead>
-                <tr class="info">
-                    <th class="text-center">
-                        <span>分类编号</span>
-                    </th>
-                    <th class="text-center">
-                        <span>一级分类名称</span>
-                    </th>
-                    <th class="text-center">
-                        <span>对应二级分类数量</span>
-                    </th>
-                    <th class="text-center">
-                        <span>操作</span>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:choose>
-                    <c:when test="${ empty requestScope.oneClassificationListBy}">
+    <div id="scrollContent" style="width: 99%">
+        <table class="table table-hover table-striped table-bordered">
+            <thead>
+            <tr class="info">
+                <th class="text-center">
+                    <span>分类编号</span>
+                </th>
+                <th class="text-center">
+                    <span>一级分类名称</span>
+                </th>
+                <th class="text-center">
+                    <span>对应二级分类数量</span>
+                </th>
+                <th class="text-center">
+                    <span>操作</span>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:choose>
+                <c:when test="${ empty requestScope.oneClassificationListBy}">
+                    <tr>
+                        <td colspan="7" align="center"><span style="color: #0000FF">未查询到数据</span></td>
+                    </tr>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach items="${requestScope.oneClassificationListBy}" var="classification">
                         <tr>
-                            <td colspan="7" align="center"><span style="color: #0000FF">未查询到数据</span></td>
+                            <td align="center">${classification.claNo}</td>
+                            <td align="center">${classification.claName}</td>
+                            <td align="center">${classification.number}</td>
+                            <td>
+                                <input type="hidden" value="${classification.claName}" id="hidden01"/>
+                                <input type="hidden" value="${classification.claFid}" id="hidden02"/>
+                                <a href="/classification/oneInfo?oneId=${classification.claFid}"><button type="button" class="btn btn-primary" ><span>修改</span></button></a>
+                                <a href="#" onclick="deleteOne(${classification.claFid},'${classification.claName}')">
+                                    <button type="button" class="btn btn-danger" ${classification.number==0? "":"disabled"}>
+                                        <span>删除</span>
+                                    </button>
+                                </a>
+                            </td>
                         </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <c:forEach items="${requestScope.oneClassificationListBy}" var="classification">
-                            <tr>
-                                <td align="center">${classification.claNo}</td>
-                                <td align="center">${classification.claName}</td>
-                                <td align="center">${classification.number}</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary" ><span>修改</span></button>
-                                    <button type="button" class="btn btn-danger" ${classification.number==0? "":"disabled"}><span>删除</span></button>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </c:otherwise>
-                </c:choose>
-                </tbody>
-            </table>
-        </div>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    /**
+     * 根据一级分类ID删除一级分类信息
+     * @param empId
+     * @param empName
+     */
+    function deleteOne(oneId, oneName) {
+        if (window.confirm('确定要删除分类【' + oneName + '】吗?')) {
+            window.location.href = '/classification/deleteOne?oneId=' + oneId;
+        }
+    }
+</script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-package com.qst.ssm.dao;
+package com.qst.ssm.mapper;
 
 import com.qst.ssm.entity.Classification;
 import com.qst.ssm.entity.Three;
@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 商品分类Dao接口
+ * 商品分类Mapper接口
  * author：lbs
  */
-public interface IClassificationDao {
+public interface ClassificationMapper  {
     /**
      * 查询所有的一级分类信息
      * @return
@@ -20,16 +20,16 @@ public interface IClassificationDao {
     List<Map> queryClassification();
 
     /**
-     * 根据一级Id查询一级分类信息，包含二级数量
+     * 根据一级Id查询一级分类信息,包含二级数量
      * @return
      */
-    List<Map> queryClassificationByOneId(Integer oneId);
+    List<Map> queryClassificationByOneId(@Param("oneId") Integer oneId);
 
     /**
      * 根据一级Id查询一级分类信息
      * @return
      */
-    Classification queryOneClassificationByOneId(Integer oneId);
+    Classification queryOneClassificationByOneId(@Param("oneId") Integer oneId);
 
     /**
      * 根据一级名称查询一级分类信息
@@ -44,8 +44,6 @@ public interface IClassificationDao {
      */
     List<Classification> queryClassificationByNoOrName(Classification classification);
 
-
-
     /**
      * 添加一级商品分类
      * @param classification    一级商品分类信息
@@ -53,15 +51,12 @@ public interface IClassificationDao {
      */
     Integer addClassificationByOne(Classification classification);
 
-
-
-
     /**
      * 根据一级分类id删除该一级分类
      * @param oneId 一级分类ID
      * @return 影响行数
      */
-    Integer deleteClassificationByOne(Integer oneId);
+    Integer deleteClassificationByOne(@Param("oneId") Integer oneId);
 
     /**
      * 根据Id修改一级分类名称
@@ -69,6 +64,5 @@ public interface IClassificationDao {
      * @return
      */
     int updateOne(Classification classification);
-
 
 }
