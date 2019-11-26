@@ -35,6 +35,35 @@ public class ThreeClassificationDaoImpl implements IThreeClassificationDao {
     }
 
     /**
+     * 根据三级分类ID查询一个三级分类信息
+     * @return
+     */
+    @Override
+    public Three queryThreeByThreeId(Integer threeId) {
+        return threeClassificationMapper.queryThreeByThreeId(threeId);
+    }
+
+    /**
+     * 根据二级id和三级名称查询三级分类信息
+     * @param three
+     * @return
+     */
+    @Override
+    public Three queryThreeByTwoIdAndThreeName(Three three) {
+        return threeClassificationMapper.queryThreeByTwoIdAndThreeName(three);
+    }
+
+    /**
+     * 根据三级编号或三级名称查询三级信息
+     * @param three
+     * @return
+     */
+    @Override
+    public List<Three> queryThreeByThreeNoOrThreeName(Three three) {
+        return threeClassificationMapper.queryThreeByThreeNoOrThreeName(three);
+    }
+
+    /**
      * 添加三级商品分类
      * @param three    三级商品分类信息
      * @return  影响行数
@@ -53,13 +82,24 @@ public class ThreeClassificationDaoImpl implements IThreeClassificationDao {
     public Integer deleteClassificationByThree(Integer threeId) {
         return threeClassificationMapper.deleteClassificationByThree(threeId);
     }
+
+    /**
+     * 修改三级分类
+     * @param three
+     * @return
+     */
+    @Override
+    public Integer updateThree(Three three) {
+        return threeClassificationMapper.updateThree(three);
+    }
+
     /**
      * 查询所有商品分类信息
      * @return
      */
     @Override
-    public List<Map> getClassification() {
-        return threeClassificationMapper.getClassification();
+    public List<Map> getClassification(Map map) {
+        return threeClassificationMapper.getClassification(map);
     }
 
     @Override

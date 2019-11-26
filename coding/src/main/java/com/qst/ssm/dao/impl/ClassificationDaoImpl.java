@@ -33,12 +33,30 @@ public class ClassificationDaoImpl implements IClassificationDao {
     }
 
     /**
-     * 根据一级Id查询一级分类信息
+     * 根据一级Id查询一级分类信息,包含二级数量
      * @return
      */
     @Override
     public List<Map> queryClassificationByOneId(Integer oneId) {
         return classificationMapper.queryClassificationByOneId(oneId);
+    }
+
+    /**
+     * 根据一级Id查询一级分类信息
+     * @return
+     */
+    @Override
+    public Classification queryOneClassificationByOneId(Integer oneId) {
+        return classificationMapper.queryOneClassificationByOneId(oneId);
+    }
+
+    /**
+     * 根据一级名称查询一级分类信息
+     * @return
+     */
+    @Override
+    public List<Classification> queryOneClassificationByOneName(Classification classification) {
+        return classificationMapper.queryOneClassificationByOneName(classification);
     }
 
     /**
@@ -71,6 +89,16 @@ public class ClassificationDaoImpl implements IClassificationDao {
     @Override
     public Integer deleteClassificationByOne(Integer oneId) {
         return classificationMapper.deleteClassificationByOne(oneId);
+    }
+
+    /**
+     * 根据Id修改一级分类名称
+     * @param classification
+     * @return
+     */
+    @Override
+    public int updateOne(Classification classification) {
+        return classificationMapper.updateOne(classification);
     }
 
 

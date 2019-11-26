@@ -41,7 +41,7 @@
         </if>
     </select>
 
-    <!--根据一级Id查询一级分类 -->
+    <!--根据一级Id查询一级分类,包含二级数量 -->
     <select id="queryClassificationByOneId" resultType="Map" parameterType="int">
         <![CDATA[
         SELECT
@@ -62,6 +62,35 @@
         </if>
     </select>
 
+    <!--根据一级Id查询一级分类 -->
+    <select id="queryOneClassificationByOneId" resultType="classification" parameterType="int">
+        <![CDATA[
+        SELECT
+            cla_fid AS claFid,
+            cla_no AS claNo,
+            cla_name AS claName
+        FROM
+            j_classification
+        WHERE
+            cla_fid =#{oneId};
+
+    ]]>
+    </select>
+
+    <!--根据一级名称查询一级分类 -->
+    <select id="queryOneClassificationByOneName" resultType="classification" parameterType="classification">
+        <![CDATA[
+        SELECT
+            cla_fid AS claFid,
+            cla_no AS claNo,
+            cla_name AS claName
+        FROM
+            j_classification
+        WHERE
+            cla_name =#{claName} and cla_fid!=#{claFid};
+
+    ]]>
+    </select>
     <!--添加一级分类-->
     <insert id="addClassificationByOne" parameterType="classification">
         INSERT INTO j_classification(cla_no,cla_name) VALUES(#{claNo},#{claName});
@@ -71,5 +100,14 @@
     <delete id="deleteClassificationByOne" parameterType="int">
         DELETE FROM j_classification WHERE cla_fid = #{oneId};
     </delete>
+
+    <update id="updateOne" parameterType="classification">
+    <![CDATA[
+        UPDATE j_classification
+        SET cla_name = #{claName}
+        WHERE
+            cla_fid = #{claFid};
+    ]]>
+    </update>
 
 </mapper>

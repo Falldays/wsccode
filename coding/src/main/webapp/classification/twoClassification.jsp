@@ -19,20 +19,19 @@
 
     <script type="text/javascript">
 
-        // $('#selectOne').change(function() {
-        //     $("#selectTwo").empty();
-        //     var optionHTML = '<option value="' + 1 + '">' + "kk" + '</option>';
-        //     $("#selectTwo").append(optionHTML);
-        // });
-
         $(function () {
+
+            setTimeout(function () {
+                $("#myspan").empty();
+            }, 6000);
+
             $('#selectOne').bind('change',function () {
                 $("#selectTwo").empty();
-                // var optionHTML = '<option value="' + 1 + '">' + "kk" + '</option>';
-                // $("#selectTwo").append(optionHTML);
-                var  oneId = $("selectOne").val();
+                var options=$("#selectOne option:selected"); //获取选中的项
+                var  oneId =options.val() //拿到选中项的值
+
                 $.ajax({
-                    url: '/qstssm_war_exploded/classification/load_two',//请求URL
+                    url: '/classification/load_two',//请求URL
                     data: {oneId: oneId},//请求参数
                     type: 'POST',//请求方式
                     dataType: 'json', //将从服务器获取的数据处理成JSON格式
@@ -42,18 +41,19 @@
                         var twos = data.twos;
                         var length = twos.length;
                         if (0 == length) {
-                            alert("未加载到二级分类数据");
-                            return;
+                            var optionHTML = '<option value="" disabled selected>--无--</option>';
+                            $("#selectTwo").append(optionHTML);
+                        }else {
+                            var optionHTML = '<option value="" disabled selected>--请选择--</option>';
+                            $("#selectTwo").append(optionHTML);
                         }
                         for (var index = 0; index < length; index++) {
                             var two = twos[index];
-                            var twoId = two.twoId;//二级分类ID
-                            var twoName = two.twoName;//二级分类名称
+                            var twoId = two.pd_twoId;//二级分类ID
+                            var twoName = two.pd_twoName;//二级分类名称
                             var optionHTML = '<option value="' + twoId + '">' + twoName + '</option>';
                             $("#selectTwo").append(optionHTML);
                         }
-                        //默认选中用户所属部门
-                        // $("#selectTwo").val(emp.depId);
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         // 请求失败
@@ -63,48 +63,7 @@
             })
         });
 
-        // $("#selectOne").change(function() {
-        //     $("#selectTwo").empty();
-        //     var optionHTML = '<option value="' + 1 + '">' + "kk" + '</option>';
-        //     $("#selectTwo").append(optionHTML);
-        // });
 
-
-
-        // $(function () {
-        //     // var oneId = $(this).val();
-        //     // $("#selectTwo").empty();
-        //     //利用jQuery AJAX加载部门数据和当前员工数据
-        //     $.ajax({
-        //         url: '/classification/load_two',//请求URL
-        //         data: {oneId: 1},//请求参数
-        //         type: 'POST',//请求方式
-        //         dataType: 'json', //将从服务器获取的数据处理成JSON格式
-        //         success: function (data) {
-        //             //请求成功,data表示从服务获取的数据
-        //             console.info(data);
-        //             var twos = data.twos;
-        //             var length = twos.length;
-        //             if (0 == length) {
-        //                 alert("未加载到二级分类数据");
-        //                 return;
-        //             }
-        //             for (var index = 0; index < length; index++) {
-        //                 var two = twos[index];
-        //                 var twoId = two.twoId;//二级分类ID
-        //                 var twoName = two.twoName;//二级分类名称
-        //                 var optionHTML = '<option value="' + twoId + '">' + twoName + '</option>';
-        //                 $("#selectTwo").append(optionHTML);
-        //             }
-        //             //默认选中用户所属部门
-        //             // $("#selectTwo").val(emp.depId);
-        //         },
-        //         error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //             // 请求失败
-        //             console.error(errorThrown);
-        //         }
-        //     });
-        // });
     </script>
 </head>
 <body>
@@ -113,7 +72,7 @@
 </ol>
 <div class="container" style="padding-left: 0px;">
     <div class="well">
-        <form action="/classification/queryClassificationByOneId" method="post">
+        <form action="/classification/queryTwoClassification" method="post">
             <div class="form-group" style="width: 100%">
                 <div class="row">
                     <div class="form-group">
@@ -146,7 +105,14 @@
                     <div>
                         <button type="submit" class="btn btn-primary"><span>查询</span></button>
                         <a href="/classification/queryTwoClassification"><button type="button" class="btn btn-primary" ><span>显示所有</span></button></a>
-                        <a href="#"><button type="button" class="btn btn-warning" ><span>添加二级分类</span></button></a>
+                        <a href="/classification/addTwoLoadOne"><button type="button" class="btn btn-warning" ><span>添加二级分类</span></button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="left">
+                    <div class="col-sm-9 text-center" >
+                        <span style="color:rgb(255,0,0)" id="myspan">${requestScope.msg}</span>
                     </div>
                 </div>
             </div>
@@ -191,7 +157,7 @@
                             <td align="center">${classification.oneName}</td>
                             <td align="center">${classification.number}</td>
                             <td>
-                                <button type="button" class="btn btn-primary" ><span>修改</span></button>
+                                <a href="/classification/twoInfo?twoId=${classification.twoId}"><button type="button" class="btn btn-primary" ><span>修改</span></button></a>
                                 <button type="button" class="btn btn-danger" ${classification.number==0? "":"disabled"}><span>删除</span></button>
                             </td>
                         </tr>

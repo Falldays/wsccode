@@ -19,54 +19,6 @@
     <script type="text/javascript" src="../res/My97DatePicker/WdatePicker.js"></script>
 
 </head>
-<script>
-    function deleteOne(oneId,oneName) {
-        if(!oneId)
-        {
-            alert('Error！');
-            return false;
-        }
-
-        $.ajax(
-            {
-                url: "classification/deleteOneClassificationByOneId",
-                data:{"oneId":oneId},
-                type: "post",
-                beforeSend:function()
-                {
-                    $("#msg").html("<span style='color:blue'>正在处理...</span>");
-                    return true;
-                },
-                success:function(data)
-                {
-                    if(data > 0)
-                    {
-                        alert('操作成功');
-                        $("#msg").html("<span style='color:blueviolet'>恭喜，删除成功！</span>");
-
-                        // document.location.href='world_system_notice.php'
-                        location.reload();
-                    }
-                    else
-                    {
-                        $("#msg").html("<span style='color:red'>失败，请重试</span>");
-                        alert('操作失败');
-                    }
-                },
-                error:function()
-                {
-                    alert('请求出错');
-                },
-                complete:function()
-                {
-                    // $('#tips').hide();
-                }
-            });
-
-        return false;
-
-    }
-</script>
 <body>
 <ol class="breadcrumb">
     <li>当前位置:一级分类管理</li>
@@ -97,7 +49,7 @@
             <div class="form-group">
                 <div class="left">
                     <div class="col-sm-9 text-center" >
-                        <span style="color:rgb(255,0,0)">${msg}</span>
+                        <span style="color:rgb(255,0,0)">${requestScope.msg}</span>
                     </div>
                 </div>
             </div>
@@ -140,44 +92,34 @@
                             <td>
                                 <input type="hidden" value="${classification.claName}" id="hidden01"/>
                                 <input type="hidden" value="${classification.claFid}" id="hidden02"/>
-                                <button type="button" class="btn btn-primary" ><span>修改</span></button>
-                                <button type="button" class="btn btn-danger" ${classification.number==0? "":"disabled"}  data-toggle="modal" data-target="#myModal" onclick="return deleteOne(${classification.claFid},${classification.claName})">
-                                    <span>删除</span>
-                                </button>
+                                <a href="/classification/oneInfo?oneId=${classification.claFid}"><button type="button" class="btn btn-primary" ><span>修改</span></button></a>
+                                <a href="#" onclick="deleteOne(${classification.claFid},'${classification.claName}')">
+                                    <button type="button" class="btn btn-danger" ${classification.number==0? "":"disabled"}>
+                                        <span>删除</span>
+                                    </button>
+                                </a>
                             </td>
                         </tr>
-
                     </c:forEach>
                 </c:otherwise>
             </c:choose>
+
             </tbody>
         </table>
     </div>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        删除分类
-                    </h4>
-                </div>
-                <div class="modal-body" id="my-div">
-                    是否确定删除一级分类：&nbsp;&nbsp;&nbsp;${classification.claName}${classification.claFid}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                        取消
-                    </button>
-                    <button type="submit" class="btn btn-danger" data-dismiss="#myModal">
-                        确认删除
-                    </button><span id="msg"> </span>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
+</div>
+<script>
+    /**
+     * 根据一级分类ID删除一级分类信息
+     * @param empId
+     * @param empName
+     */
+    function deleteOne(oneId, oneName) {
+        if (window.confirm('确定要删除分类【' + oneName + '】吗?')) {
+            window.location.href = '/classification/deleteOne?oneId=' + oneId;
+        }
+    }
+</script>
 </body>
 
 </html>

@@ -3,6 +3,7 @@ package com.qst.ssm.dao;
 import com.qst.ssm.entity.Classification;
 import com.qst.ssm.entity.Three;
 import com.qst.ssm.entity.Two;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -19,10 +20,22 @@ public interface IClassificationDao {
     List<Map> queryClassification();
 
     /**
-     * 根据一级Id查询一级分类信息
+     * 根据一级Id查询一级分类信息，包含二级数量
      * @return
      */
     List<Map> queryClassificationByOneId(Integer oneId);
+
+    /**
+     * 根据一级Id查询一级分类信息
+     * @return
+     */
+    Classification queryOneClassificationByOneId(Integer oneId);
+
+    /**
+     * 根据一级名称查询一级分类信息
+     * @return
+     */
+    List<Classification> queryOneClassificationByOneName(Classification classification);
 
     /**
      * 根据编号或名称查询一级分类
@@ -50,7 +63,12 @@ public interface IClassificationDao {
      */
     Integer deleteClassificationByOne(Integer oneId);
 
-
+    /**
+     * 根据Id修改一级分类名称
+     * @param classification
+     * @return
+     */
+    int updateOne(Classification classification);
 
 
 }

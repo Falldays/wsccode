@@ -26,10 +26,22 @@ public interface IClassificationService {
     List<Classification> queryClassificationByNoOrName(Classification classification);
 
     /**
-     * 根据一级Id查询一级分类信息
+     * 根据一级Id查询一级分类信息，包含二级数量
      * @return
      */
     List<Map> queryClassificationByOneId(Integer oneId);
+
+    /**
+     * 根据一级Id查询一级分类信息
+     * @return
+     */
+    Classification queryOneClassificationByOneId(Integer oneId);
+
+    /**
+     * 根据一级名称查询一级分类信息
+     * @return
+     */
+    List<Classification> queryOneClassificationByOneName(Classification classification);
 
     /**
      * 根据一级分类ID查询所有二级分类信息
@@ -38,10 +50,32 @@ public interface IClassificationService {
     List<Two> queryClassificationByTwo(Integer oneId);
 
     /**
+     * 根据二级编号或名称查询二级信息
+     * @param two
+     * @return
+     */
+    List<Two> queryTwoByNoOrName(Two two);
+
+    /**
+     * 根据二级id查询二级分类信息
+     * @param twoId
+     * @return
+     */
+    Two queryTwoByTwoId(Integer twoId);
+
+    /**
+     * 根据一级id和二级名称查询二级分类信息
+     * @param two
+     * @return
+     */
+    Two queryTwoByOneIdAndTwoName(Two two);
+
+
+    /**
      * 查询二级分类信息，包括一级名、三级数量
      * @return
      */
-    List<Map> queryTwoClassification();
+    List<Map> queryTwoClassification(Map map);
 
     /**
      * 根据二级分类ID查询所有三级分类信息
@@ -49,12 +83,31 @@ public interface IClassificationService {
      */
     List<Three> queryClassificationByThree(Integer twoId);
 
+    /**
+     * 根据三级编号或三级名称查询三级信息
+     * @param three
+     * @return
+     */
+    List<Three> queryThreeByThreeNoOrThreeName(Three three);
+
+    /**
+     * 根据三级分类ID查询一个三级分类信息
+     * @return
+     */
+    Three queryThreeByThreeId(Integer threeId);
+
+    /**
+     * 根据二级id和三级名称查询三级分类信息
+     * @param three
+     * @return
+     */
+    Three queryThreeByTwoIdAndThreeName(Three three);
 
     /**
      * 查询所有商品分类信息
      * @return
      */
-    List<Map> getClassification();
+    List<Map> getClassification(Map map);
 
 
     /**
@@ -104,4 +157,25 @@ public interface IClassificationService {
      * @return 影响行数
      */
     Integer deleteClassificationByThree(Integer threeId);
+
+    /**
+     * 根据Id修改一级分类名称
+     * @param classification
+     * @return
+     */
+    int updateOne(Classification classification);
+
+    /**
+     * 修改二级分类
+     * @param two
+     * @return
+     */
+    int updateTwo(Two two);
+
+    /**
+     * 修改三级分类
+     * @param three
+     * @return
+     */
+    Integer updateThree(Three three);
 }

@@ -39,8 +39,38 @@ public class TwoClassificationDaoImpl implements ITwoClassificationDao {
      * @return
      */
     @Override
-    public List<Map> queryTwoClassification() {
-        return twoClassificationMapper.queryTwoClassification();
+    public List<Map> queryTwoClassification(Map map) {
+        return twoClassificationMapper.queryTwoClassification(map);
+    }
+
+    /**
+     * 根据二级编号或名称查询二级信息
+     * @param two
+     * @return
+     */
+    @Override
+    public List<Two> queryTwoByNoOrName(Two two) {
+        return twoClassificationMapper.queryTwoByNoOrName(two);
+    }
+
+    /**
+     * 根据二级id查询二级分类信息
+     * @param twoId
+     * @return
+     */
+    @Override
+    public Two queryTwoByTwoId(Integer twoId) {
+        return twoClassificationMapper.queryTwoByTwoId(twoId);
+    }
+
+    /**
+     * 根据一级id和二级名称查询二级分类信息
+     * @param two
+     * @return
+     */
+    @Override
+    public Two queryTwoByOneIdAndTwoName(Two two) {
+        return twoClassificationMapper.queryTwoByOneIdAndTwoName(two);
     }
 
 
@@ -52,6 +82,16 @@ public class TwoClassificationDaoImpl implements ITwoClassificationDao {
     @Override
     public Integer addClassificationByTwo(Two two) {
         return twoClassificationMapper.addClassificationByTwo(two);
+    }
+
+    /**
+     * 修改二级分类
+     * @param two
+     * @return
+     */
+    @Override
+    public int updateTwo(Two two) {
+        return twoClassificationMapper.updateTwo(two);
     }
 
 

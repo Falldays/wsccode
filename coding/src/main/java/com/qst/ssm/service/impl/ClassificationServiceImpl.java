@@ -10,6 +10,8 @@ import com.qst.ssm.service.IClassificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -53,12 +55,30 @@ public class ClassificationServiceImpl implements IClassificationService {
     }
 
     /**
-     * 根据一级Id查询一级分类信息
+     * 根据一级Id查询一级分类信息,包含二级数量
      * @return
      */
     @Override
     public List<Map> queryClassificationByOneId(Integer oneId) {
         return classificationDao.queryClassificationByOneId(oneId);
+    }
+
+    /**
+     * 根据一级Id查询一级分类信息
+     * @return
+     */
+    @Override
+    public Classification queryOneClassificationByOneId(Integer oneId) {
+        return classificationDao.queryOneClassificationByOneId(oneId);
+    }
+
+    /**
+     * 根据一级名称查询一级分类信息
+     * @return
+     */
+    @Override
+    public List<Classification> queryOneClassificationByOneName(Classification classification) {
+        return classificationDao.queryOneClassificationByOneName(classification);
     }
 
     /**
@@ -71,12 +91,42 @@ public class ClassificationServiceImpl implements IClassificationService {
     }
 
     /**
+     * 根据二级编号或名称查询二级信息
+     * @param two
+     * @return
+     */
+    @Override
+    public List<Two> queryTwoByNoOrName(Two two) {
+        return twoClassificationDao.queryTwoByNoOrName(two);
+    }
+
+    /**
+     * 根据二级id查询二级分类信息
+     * @param twoId
+     * @return
+     */
+    @Override
+    public Two queryTwoByTwoId(Integer twoId) {
+        return twoClassificationDao.queryTwoByTwoId(twoId);
+    }
+
+    /**
+     * 根据一级id和二级名称查询二级分类信息
+     * @param two
+     * @return
+     */
+    @Override
+    public Two queryTwoByOneIdAndTwoName(Two two) {
+        return twoClassificationDao.queryTwoByOneIdAndTwoName(two);
+    }
+
+    /**
      * 查询所有二级分类信息，包括一级名、三级数量
      * @return
      */
     @Override
-    public List<Map> queryTwoClassification() {
-        return twoClassificationDao.queryTwoClassification();
+    public List<Map> queryTwoClassification(Map map) {
+        return twoClassificationDao.queryTwoClassification(map);
     }
 
     /**
@@ -89,12 +139,41 @@ public class ClassificationServiceImpl implements IClassificationService {
     }
 
     /**
+     * 根据三级编号或三级名称查询三级信息
+     * @param three
+     * @return
+     */
+    @Override
+    public List<Three> queryThreeByThreeNoOrThreeName(Three three) {
+        return threeClassificationDao.queryThreeByThreeNoOrThreeName(three);
+    }
+
+    /**
+     * 根据三级分类ID查询一个三级分类信息
+     * @return
+     */
+    @Override
+    public Three queryThreeByThreeId(Integer threeId) {
+        return threeClassificationDao.queryThreeByThreeId(threeId);
+    }
+
+    /**
+     * 根据二级id和三级名称查询三级分类信息
+     * @param three
+     * @return
+     */
+    @Override
+    public Three queryThreeByTwoIdAndThreeName(Three three) {
+        return threeClassificationDao.queryThreeByTwoIdAndThreeName(three);
+    }
+
+    /**
      * 查询所有商品分类信息
      * @return
      */
     @Override
-    public List<Map> getClassification() {
-        return threeClassificationDao.getClassification();
+    public List<Map> getClassification(Map map) {
+        return threeClassificationDao.getClassification(map);
     }
 
 
@@ -165,5 +244,37 @@ public class ClassificationServiceImpl implements IClassificationService {
     @Override
     public Integer deleteClassificationByThree(Integer threeId) {
         return threeClassificationDao.deleteClassificationByThree(threeId);
+    }
+
+    /**
+     * 根据Id修改一级分类名称
+     * @param classification
+     * @return
+     */
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    public int updateOne(Classification classification) {
+        return classificationDao.updateOne(classification);
+    }
+
+    /**
+     * 修改二级分类
+     * @param two
+     * @return
+     */
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    public int updateTwo(Two two) {
+        return twoClassificationDao.updateTwo(two);
+    }
+
+    /**
+     * 修改三级分类
+     * @param three
+     * @return
+     */
+    @Override
+    public Integer updateThree(Three three) {
+        return threeClassificationDao.updateThree(three);
     }
 }

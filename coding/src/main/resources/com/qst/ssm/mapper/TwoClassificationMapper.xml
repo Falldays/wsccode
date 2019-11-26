@@ -17,8 +17,54 @@
     ]]>
     </select>
 
+    <!--根据二级id查询二级分类信息-->
+    <select id="queryTwoByTwoId" parameterType="int" resultType="two">
+        <![CDATA[
+        SELECT
+            pd_two_id AS pd_twoId,
+            pd_two_no AS pd_twoNo,
+            pd_two_name AS pd_twoName,
+            cla_fid AS claFid
+        FROM
+            j_two_classification
+        WHERE
+        pd_two_id =#{pd_twoId};
+        ]]>
+    </select>
+
+    <!--根据一级id和二级名称查询二级分类信息-->
+    <select id="queryTwoByOneIdAndTwoName" parameterType="two" resultType="two">
+        <![CDATA[
+        SELECT
+            pd_two_id AS pd_twoId,
+            pd_two_no AS pd_twoNo,
+            pd_two_name AS pd_twoName,
+            cla_fid AS claFid
+        FROM
+            j_two_classification
+        WHERE
+        pd_two_name =#{pd_twoName} and cla_fid =#{claFid};
+        ]]>
+    </select>
+
+    <!--根据二级编号或名称查询二级信息-->
+    <select id="queryTwoByNoOrName" parameterType="two" resultType="two">
+        <![CDATA[
+            SELECT
+                pd_two_id as pd_twoId,
+                pd_two_no as pd_twoNo,
+                pd_two_name as pd_twoName,
+                cla_fid as claFid
+            FROM
+                j_two_classification
+            WHERE
+                pd_two_no = #{pd_twoNo}
+                OR (pd_two_name = #{pd_twoName} AND cla_fid = #{claFid} );
+        ]]>
+    </select>
+
     <!--查询二级分类信息，包括一级名、三级数量-->
-    <select id="queryTwoClassification" resultType="Map" >
+    <select id="queryTwoClassification" resultType="Map" parameterType="Map" >
     <![CDATA[
         SELECT
             oneTwo.oneId as oneId,
@@ -41,8 +87,17 @@
             ) AS oneTwo
             LEFT JOIN j_three_classification AS three ON oneTwo.twoId = three.pd_two_id
         GROUP BY
-            oneTwo.twoId;
+            oneTwo.twoId
     ]]>
+        <if test="oneId!=null or twoId!=null">
+            having
+        </if>
+        <if test="twoId!=null">
+            oneTwo.twoId=#{twoId}
+        </if>
+        <if test="twoId==null and oneId!=null">
+            oneTwo.oneId=#{oneId}
+        </if>
     </select>
 
 
@@ -51,8 +106,10 @@
         INSERT INTO j_two_classification(pd_two_no,pd_two_name,cla_fid) VALUES(#{pd_twoNo},#{pd_twoName},#{claFid});
     </insert>
 
-
-
+    <!--修改二级分类名称-->
+    <update id="updateTwo" parameterType="two">
+        UPDATE j_two_classification set pd_two_name = #{pd_twoName} where pd_two_id = #{pd_twoId};
+    </update>
 
     <!--删除某一个二级商品分类-->
     <delete id="deleteClassificationByTwo" parameterType="int">
