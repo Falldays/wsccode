@@ -52,4 +52,14 @@ public class UserServiceImpl implements IUserService {
     public int updatepassword(int userId) {
         return 0;
     }
+
+    /**
+     * 根据用户账号密码获取用户信息
+     * @param user
+     * @return
+     */
+    @Override
+    public User login(User user) {
+        return userDao.login(user);
+    }
 }

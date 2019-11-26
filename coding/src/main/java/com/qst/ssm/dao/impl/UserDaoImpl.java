@@ -39,4 +39,14 @@ public class UserDaoImpl implements IUserDao {
     public int updateUser(User user) {
         return userMapper.updateUser(user);
     }
+
+    /**
+     * 根据用户账号密码获取用户信息
+     * @param user
+     * @return
+     */
+    @Override
+    public User login(User user) {
+        return userMapper.login(user);
+    }
 }

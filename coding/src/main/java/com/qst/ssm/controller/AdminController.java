@@ -1,7 +1,6 @@
 package com.qst.ssm.controller;
 
 import com.qst.ssm.entity.Admin;
-import com.qst.ssm.entity.Product;
 import com.qst.ssm.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,10 +8,12 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +63,7 @@ public class AdminController {
         Admin admin = adminService.getAdmin(adminId);
         model.addAttribute("admin", admin);
         return "/admin/info.jsp";
-    }
+    };
 
     /**
      * 添加管理员
@@ -73,7 +74,7 @@ public class AdminController {
     @RequestMapping("add")
     public String addAdmin(Admin admin) {
         int rows = adminService.insertAdmin(admin);
-        return "redirect:/admin/info?rows=" + rows;
+        return "redirect:/admin/add_admin_result.jsp?rows=" + rows;
     }
 
     /**
@@ -101,48 +102,37 @@ public class AdminController {
      */
     @RequestMapping("update")
     public String updateAdmin(Admin admin) {
-        int rows =adminService.updateAdmin(admin);
-        return "redirect:/admin/update_admin_result.jsp?rows="+rows;
+        int rows = adminService.updateAdmin(admin);
+        return "redirect:/admin/update_admin_result.jsp?rows=" + rows;
     }
 
-    @RequestMapping(value = "load_product",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
-    public Map<String,Object> loadProduct(@RequestParam("pd_id") int pdId){
-        Product product=adminService.getProduct(pdId);
-        Map<String,Object> dataMap=new HashMap<>();
-        dataMap.put("product",product);
-        return dataMap;
-    }
-    @RequestMapping("updateproduct")
-    public String updateProduct(Product product){
-        int rows=adminService.updateProduct(product);
-        return "redirect:/product/update_product_result.jsp?rows="+rows;
-    };
     /**
-     * 添加商品
-     * @param product
-     * @return
-     */
-    @RequestMapping("addproduct")
-    public String addProduct(Product product){
-        int rows=adminService.insertProduct(product);
-        return "redirect:/product/add_product_result.jsp?rows="+rows;
-    };
-
-    /**
-     * 查询商品
+     * 管理员登录
+     * @param admin
      * @param model
+     * @param session
      * @return
-     */
-    @RequestMapping("queryproduct")
-    public String productQuery(Model model){
-        List<Product> productList=adminService.queryProduct();
-        model.addAttribute("productList", productList);
-        return "/product/query_product.jsp";
-    };
-    @RequestMapping("deleteproduct")
-    public String productDelete(@RequestParam("pd_id")int pdId){
-        int rows=adminService.deleteProduct(pdId);
-        return "redirect:/product/delete_product_result.jsp?rows="+rows;
-    };
+             */
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public String login(Admin admin, Model model, HttpSession session){
+        Admin admin1 = adminService.login(admin);
+        String href= null;
+        if (admin1==null){
+            //出现异常
+            model.addAttribute("msg","发生异常，请重新登录！");
+            href = "/adminLogin.jsp";
+        }else if (admin1.getAdminId()==null){
+            //不存在
+            model.addAttribute("msg","账号或密码错误，请重新登录！");
+            href = "/adminLogin.jsp";
+        }else {
+            //登录成功
+            session.setAttribute("admin",admin);
+            href = "#";
+        }
+        model.addAttribute("msg","用户名或密码错误，请重新登录！");
+        return  href;
+
+    }
+
 }

@@ -48,4 +48,11 @@ public interface IUserService {
      * @return
      */
     int updatepassword(int userId);
+
+    /**
+     * 根据用户账号密码获取用户信息
+     * @param user
+     * @return
+     */
+    User login(User user);
 }
