@@ -124,15 +124,28 @@ public class UserController {
         }else if (user1.getUserId()==null){
             //不存在
             model.addAttribute("msg","账号或密码错误，请重新登录！");
-            href = "/userLogin.jsp";
+            return href = "/userLogin.jsp";
         }else {
             //登录成功
             session.setAttribute("user",user);
-            href = "/index.jsp";
+            return href = "/index.jsp";
         }
         model.addAttribute("msg","用户名或密码错误，请重新登录！");
-        return  href ="#";
+        System.out.println("用户名或密码错误，请重新登录");
+        return  href="/userLogin.jsp";
+    }
 
+    /**
+     * 用户退出
+     * @param session
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/logout")
+    public String logout(HttpSession session)throws Exception{
+        session.removeAttribute("userId");
+        session.invalidate();
+        return "redirect:/userLogin.jsp";
     }
 
 }

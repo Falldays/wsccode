@@ -79,15 +79,15 @@
         <![CDATA[
             SELECT
                 admin_id as adminId,
-                admin_no as adminNo
+                admin_no as adminNo,
                 admin_name as adminName,
                 admin_mobile as mobile,
-                admin_sex as sex,
+                admin_sex as sex
             FROM
                 j_admin
             WHERE
                 admin_name = #{adminName}
-                AND admin_password = MD5( #{password});
+                AND admin_pass = MD5( #{password});
         ]]>
     </select>
 

@@ -49,4 +49,9 @@ public class AdminDaoImpl implements IAdminDao {
     public Admin login(Admin admin) {
         return adminMapper.login(admin);
     }
+
+    @Override
+    public int logout(int adminId) {
+        return adminMapper.logout(adminId);
+    }
 }

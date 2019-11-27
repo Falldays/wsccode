@@ -63,4 +63,9 @@ public class AdminServiceImpl implements IAdminService{
     public Admin login(Admin admin) {
         return adminDao.login(admin);
     }
+
+    @Override
+    public int logout(int adminId) {
+        return adminDao.logout(adminId);
+    }
 }

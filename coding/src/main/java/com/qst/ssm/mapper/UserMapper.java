@@ -50,4 +50,11 @@ public interface UserMapper {
      * @return
      */
     User login(User user);
+
+    /**
+     * 用户退出
+     * @param userId
+     * @return
+     */
+    int logout(int userId);
 }

@@ -49,4 +49,14 @@ public class UserDaoImpl implements IUserDao {
     public User login(User user) {
         return userMapper.login(user);
     }
+
+    /**
+     * 用户退出
+     * @param userId
+     * @return
+     */
+    @Override
+    public int logout(int userId) {
+        return userMapper.logout(userId);
+    }
 }

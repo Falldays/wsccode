@@ -46,4 +46,6 @@ public interface IAdminDao {
      * @return
      */
     Admin login(Admin admin);
+
+    int logout(int adminId);
 }

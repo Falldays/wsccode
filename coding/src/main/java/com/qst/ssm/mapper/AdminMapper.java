@@ -53,4 +53,6 @@ public interface AdminMapper {
      * @return
      */
     Admin login(Admin admin);
+
+    int logout(int adminId);
 }

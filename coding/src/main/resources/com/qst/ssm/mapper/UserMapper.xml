@@ -92,4 +92,18 @@
         ]]>
     </select>
 
+    <select id="logout" parameterType="user" resultType="int">
+        <![CDATA[
+            SELECT
+                user_id as userId,
+                user_name as userName,
+                user_nc as userNc,
+                user_tel as tel,
+                user_sex as sex,
+                user_date as birthday
+            FROM
+                j_user
+            where user_id=#{user_id}
+        ]]>
+    </select>
 </mapper>

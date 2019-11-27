@@ -62,4 +62,14 @@ public class UserServiceImpl implements IUserService {
     public User login(User user) {
         return userDao.login(user);
     }
+
+    /**
+     * 用户退出
+     * @param userId
+     * @return
+     */
+    @Override
+    public int logout(int userId) {
+        return userDao.logout(userId);
+    }
 }

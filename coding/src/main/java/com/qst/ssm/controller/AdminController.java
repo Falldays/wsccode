@@ -124,15 +124,26 @@ public class AdminController {
         }else if (admin1.getAdminId()==null){
             //不存在
             model.addAttribute("msg","账号或密码错误，请重新登录！");
-            href = "/adminLogin.jsp";
+            return href = "/adminLogin.jsp";
         }else {
             //登录成功
             session.setAttribute("admin",admin);
-            href = "#";
+            return href = "/left.jsp";
         }
         model.addAttribute("msg","用户名或密码错误，请重新登录！");
-        return  href;
-
+        return  href="/adminLogin.jsp";
     }
 
+    /**
+     * admin退出
+     * @param session
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/logout")
+    public String logout(HttpSession session)throws Exception{
+        session.removeAttribute("adminId");
+        session.invalidate();
+        return "redirect:/admin/login";
+    }
 }
