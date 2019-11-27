@@ -360,7 +360,7 @@ public class ClassificationController {
      */
     @RequestMapping(value = "updateTwo")
     public String updateTwo(Model model, Two two) {
-      Two two1 = classificationService.queryTwoByOneIdAndTwoName(two);
+        Two two1 = classificationService.queryTwoByOneIdAndTwoName(two);
         if (two1!=null) {
             //存在重复名称
             model.addAttribute("msg", "修改失败，该名称已存在!");
@@ -420,32 +420,10 @@ public class ClassificationController {
      */
     @RequestMapping(value = "deleteOne")
     public String deleteOne(Model model,Integer oneId) {
-//        int rows = classificationService.deleteClassificationByOne(oneId);
-//        if (rows==1){
-//            //删除成功
-//            model.addAttribute("msg","删除成功！");
-//        }else if (rows==0){
-//            //该分类不存在
-//            model.addAttribute("msg","该分类不存在，或已被删除！");
-//        }else {
-//            //发生异常
-//            model.addAttribute("msg","出现异常，删除分类失败！");
-//        }
-        System.out.println(oneId);
-//        return "redirect:/classification/queryClassification";
-        return null;
+        int rows = classificationService.deleteClassificationByOne(oneId);
+        return "redirect:/classification/delete_one_result.jsp?rows="+rows;
     }
 
-    /**
-     * 根据一级分类ID删除该分类
-     * @param model
-     * @param oneId
-     * @return
-     */
-    @RequestMapping(value = "deleteOneClassificationByOneId")
-    public Integer deleteOneClassificationByOneId(Model model, Integer oneId) {
-        return classificationService.deleteClassificationByOne(oneId);
-    }
 
     /**
      * 根据二级分类ID删除该分类
@@ -453,20 +431,10 @@ public class ClassificationController {
      * @param twoId
      * @return
      */
-    @RequestMapping(value = "deleteTwoClassification")
-    public String deleteTwoClassification(Model model,Integer twoId) {
+    @RequestMapping(value = "deleteTwo")
+    public String deleteTwo(Model model,Integer twoId) {
         int rows = classificationService.deleteClassificationByTwo(twoId);
-        if (rows==1){
-            //删除成功
-            model.addAttribute("msg","删除成功！");
-        }else if (rows==0){
-            //该分类不存在
-            model.addAttribute("msg","该分类不存在，或已被删除！");
-        }else {
-            //发生异常
-            model.addAttribute("msg","出现异常，删除分类失败！");
-        }
-        return "redirect:/classification/queryTwoClassification";
+        return "redirect:/classification/delete_two_result.jsp?rows="+rows;
     }
 
     /**
@@ -475,20 +443,10 @@ public class ClassificationController {
      * @param threeId
      * @return
      */
-    @RequestMapping(value = "deleteThreeClassification")
-    public String deleteThreeClassification(Model model,Integer threeId) {
+    @RequestMapping(value = "deleteThree")
+    public String deleteThree(Model model,Integer threeId) {
         int rows = classificationService.deleteClassificationByThree(threeId);
-        if (rows==1){
-            //删除成功
-            model.addAttribute("msg","删除成功！");
-        }else if (rows==0){
-            //该分类不存在
-            model.addAttribute("msg","该分类不存在，或已被删除！");
-        }else {
-            //发生异常
-            model.addAttribute("msg","出现异常，删除分类失败！");
-        }
-        return "redirect:/classification/queryThreeClassification";
+        return "redirect:/classification/delete_three_result.jsp?rows="+rows;
     }
 
 }

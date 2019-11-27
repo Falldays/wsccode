@@ -158,7 +158,9 @@
                             <td align="center">${classification.number}</td>
                             <td>
                                 <a href="/classification/twoInfo?twoId=${classification.twoId}"><button type="button" class="btn btn-primary" ><span>修改</span></button></a>
-                                <button type="button" class="btn btn-danger" ${classification.number==0? "":"disabled"}><span>删除</span></button>
+                                <a href="#" onclick="deleteTwo(${classification.twoId},'${classification.twoName}')">
+                                    <button type="button" class="btn btn-danger" ${classification.number==0? "":"disabled"}><span>删除</span></button>
+                                </a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -167,6 +169,18 @@
             </tbody>
         </table>
     </div>
+    <script>
+        /**
+         * 根据一级分类ID删除一级分类信息
+         * @param empId
+         * @param empName
+         */
+        function deleteTwo(twoId, twoName) {
+            if (window.confirm('确定要删除分类【' + twoName + '】吗?')) {
+                window.location.href = '/classification/deleteTwo?twoId=' + twoId;
+            }
+        }
+    </script>
 </body>
 
 </html>
