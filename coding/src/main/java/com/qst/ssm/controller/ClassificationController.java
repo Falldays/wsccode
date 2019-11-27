@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 商品分类管理控制器类
+ * 商品分类管理控制器类qqqqqqqqqqqq
  * author: lbs
  */
 @Controller
