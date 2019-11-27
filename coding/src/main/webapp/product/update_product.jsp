@@ -13,7 +13,7 @@
 
     <script>
         $(function () {
-            //利用jQuery AJAX加载部门数据和当前员工数据
+            //利用jQuery AJAX加载部门数据和当前商品数据
             $.ajax({
                 url: '/admin/load_product',//请求URL
                 data: {pd_id: '${param.pd_id}'},//请求参数
@@ -22,14 +22,14 @@
                 success: function (data) {
                     //请求成功,data表示从服务获取的数据
                     console.info(data)
-                    //获取员工数据
+                    //获取商品数据
                     var product=data.product;
                     if($.isEmptyObject(product)){
                         alert("该商品不存在或已被删除");
                         $('input,select').attr('disabled',true);
                         return;
                     }
-                    //设置员工数据
+                    //设置商品数据
                     $('input[name="pdthreeId"]').val(product.pdthreeId);
                     $('input[name="pdNo"]').val(product.pdNo);
                     $('input[name="pdName"]').val(product.pdName);

@@ -7,14 +7,16 @@
     <select id="queryUser" resultType="user">
         <![CDATA[
         select
-            user_id as userId,
-            user_name as userName,
-            user_nc as userNc,
+            user_id as userid,
+            user_name as username,
+            user_nc as usernc,
             user_tel as tel,
             user_sex as sex,
-            user_date as birthday
+            user_date as birthday,
+            user_password as password
         from
             j_user
+        where user_name=#{username}
         ]]>
     </select>
     <!-- 根据用户ID加载用户信息-->

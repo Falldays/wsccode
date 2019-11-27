@@ -8,11 +8,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>欢迎使用SSM</title>
+    <title>登录</title>
 </head>
 <body>
-请参考案例:
-<a href="/emp/add_emp.jsp">添加员工</a>
-<a href="/emp/query">查询员工</a>
+<form action="/user/query" method="post">
+    <ul style="list-style: none">
+    <li>用户名：<input type="text" name="username"></li>
+    <li>密码：<input type="text" name="password"></li>
+        <li><input type="submit" value="立即登录"></li>
+        <li><input type="reset" value="重新填写"></li>
+    </ul>
+</form>
 </body>
 </html>
+

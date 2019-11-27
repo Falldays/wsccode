@@ -10,7 +10,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>无标题文档</title>
+    <title>失败</title>
     <link href="css/skin/css/style.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="js/jquery.min.js"></script>
 </head>
@@ -22,7 +22,7 @@
 </div>
 <div class="topright">
     <ul>
-        <li><span><img src="css/skin/images/help.png" title="帮助"  class="helpimg"/></span>
+        <li><span><img src="/css/skin/images/help.png" title="帮助"  class="helpimg"/></span>
             <a href="#">帮助</a>
         </li>
         <li>

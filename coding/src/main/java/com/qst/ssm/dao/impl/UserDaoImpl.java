@@ -16,8 +16,8 @@ public class UserDaoImpl implements IUserDao {
     private UserMapper userMapper;
 
     @Override
-    public List<User> queryUser() {
-        return userMapper.queryUser();
+    public User queryUser(String username) {
+        return userMapper.queryUser(username);
     }
 
     @Override

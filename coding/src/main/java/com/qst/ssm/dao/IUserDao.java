@@ -10,7 +10,7 @@ public interface IUserDao {
      *
      * @return
      */
-    List<User> queryUser();
+    User  queryUser(String username);
 
     /**
      * 根据用户ID加载用户信息

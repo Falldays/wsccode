@@ -21,20 +21,18 @@ public class Orderxx {
      */
     private Integer pdNumber;
     /**
-     *订单状态
-     */
-    private Integer orderStatus;
-    /**
      *商品价格
      */
     private Integer pdPrice;
 
-    public Orderxx(Integer orderxxId, Integer orderId, Integer pdId, Integer pdNumber, Integer orderStatus, Integer pdPrice) {
+    public Orderxx() {
+    }
+
+    public Orderxx(Integer orderxxId, Integer orderId, Integer pdId, Integer pdNumber, Integer pdPrice) {
         this.orderxxId = orderxxId;
         this.orderId = orderId;
         this.pdId = pdId;
         this.pdNumber = pdNumber;
-        this.orderStatus = orderStatus;
         this.pdPrice = pdPrice;
     }
 
@@ -42,44 +40,36 @@ public class Orderxx {
         return orderxxId;
     }
 
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    public Integer getPdId() {
-        return pdId;
-    }
-
-    public Integer getPdNumber() {
-        return pdNumber;
-    }
-
-    public Integer getOrderStatus() {
-        return orderStatus;
-    }
-
-    public Integer getPdPrice() {
-        return pdPrice;
-    }
-
     public void setOrderxxId(Integer orderxxId) {
         this.orderxxId = orderxxId;
+    }
+
+    public Integer getOrderId() {
+        return orderId;
     }
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
 
+    public Integer getPdId() {
+        return pdId;
+    }
+
     public void setPdId(Integer pdId) {
         this.pdId = pdId;
+    }
+
+    public Integer getPdNumber() {
+        return pdNumber;
     }
 
     public void setPdNumber(Integer pdNumber) {
         this.pdNumber = pdNumber;
     }
 
-    public void setOrderStatus(Integer orderStatus) {
-        this.orderStatus = orderStatus;
+    public Integer getPdPrice() {
+        return pdPrice;
     }
 
     public void setPdPrice(Integer pdPrice) {
@@ -93,7 +83,6 @@ public class Orderxx {
                 ", orderId=" + orderId +
                 ", pdId=" + pdId +
                 ", pdNumber=" + pdNumber +
-                ", orderStatus=" + orderStatus +
                 ", pdPrice=" + pdPrice +
                 '}';
     }
