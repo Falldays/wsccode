@@ -19,8 +19,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @Transactional(propagation = Propagation.NEVER)
-    public List<User> queryUser() {
-        return userDao.queryUser();
+    public User queryUser(String username) {
+        return userDao.queryUser(username);
     }
 
     @Override

@@ -20,7 +20,7 @@
         <span style="color:rgb(255,0,0)">修改失败,服务器异常</span>
     </c:when>
     <c:otherwise>
-        <span style="color:rgb(219,99,48)">修改员工,服务器返回未知的状态</span>
+        <span style="color:rgb(219,99,48)">修改订单,服务器返回未知的状态</span>
     </c:otherwise>
 </c:choose>
 <a href="#">返回查询页面</a>

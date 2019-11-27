@@ -35,6 +35,9 @@ public class User {
      */
     private String password;
 
+    public User() {
+    }
+
     /**
      * 用户构造方法
      * @param userId
@@ -45,6 +48,7 @@ public class User {
      * @param brithday
      * @param password
      */
+
     public User(Integer userId, String userName, Integer sex, String tel, String userNc, Date brithday, String password) {
         this.userId = userId;
         this.userName = userName;

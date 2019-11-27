@@ -23,6 +23,7 @@
             <th>订单总价</th>
             <th>快递单号</th>
             <th>创建时间</th>
+            <th>创建时间</th>
         </tr>
         <c:choose>
             <c:when test="${ empty requestScope.mapList}">
@@ -40,9 +41,10 @@
                         <td>${map.expressNo}</td>
                         <!-- 利用格式化标签输出创建时间-->
                         <td><fmt:formatDate value="${map.createTime}" pattern="yyyy-MM-dd"/></td>
+                        <td>${map.orderId}</td>
                         <td>
                             <a href="#" onclick="deleteOrder(${map.orderId})">删除</a>
-                            <a href="/order/updateOrder?order_id=${map.orderId}" target="_blank">修改</a>
+                            <a href="/order/update-order.jsp?order_id=${map.orderId}" target="_blank">修改</a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -55,7 +57,7 @@
              * @param empName
              */
             function deleteOrder(orderId) {
-                if (window.confirm('确定要删除该订单吗?')) {
+                if (window.confirm('确定要删除该订单'+orderId+'吗?')) {
                     window.location.href = '/order/deleteOrder?orderId=' + orderId;
                 }
             }

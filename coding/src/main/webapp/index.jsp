@@ -31,9 +31,9 @@
 <div class="top" id="item4">
     <div class="container clearfix">
         <ul class="clearfix fr">
-            <li><a href="#">您好，请登录</a></li>
+            <li><a href="login.jsp">您好，请登录</a></li>
             <li><a href="#">免费注册</a></li>
-            <li><a href="#">我的订单</a></li>
+            <li><a href="/order/queryOrder">我的订单</a></li>
             <li><a href="/collect/querypro?user_id=1">我的收藏夹</a></li>
             <li><a href="#">我的购物车</a></li>
             <li><a href="#">联系客服</a></li>

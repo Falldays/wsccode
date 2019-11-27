@@ -1,5 +1,6 @@
 package com.qst.ssm.controller;
 
+import cn.hutool.crypto.digest.DigestUtil;
 import com.qst.ssm.entity.User;
 import com.qst.ssm.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,11 +33,16 @@ public class UserController {
      * @return
      */
     @RequestMapping("query")
-    public String queryUser(HttpServletRequest request, Model model) {
-        List<User> userList = userService.queryUser();
-        //request.setAttribute("userList",userList);
-        model.addAttribute("userList", userList);
-        return "/user/query_user.jsp";
+    public String queryUser(HttpServletRequest request) {
+        String username=request.getParameter("username");
+        String password1= request.getParameter("password");
+        String pwd=DigestUtils.md5DigestAsHex(password1.getBytes());
+        User user= userService.queryUser(username);
+        String password= user.getPassword();
+        if(password.equals(pwd)){
+            return"/main.jsp";
+        }
+        return"/top.jsp";
     }
 
     /**
@@ -84,9 +91,10 @@ public class UserController {
      */
     @RequestMapping(value = "load_one", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public Map<String, Object> loadUserData(@RequestParam("user_id") int userId) {
+    public Map<String, Object> loadUserData(@RequestParam("user_id") int userId,HttpServletRequest request) {
         User user = userService.getUser(userId);
-        List<User> users = userService.queryUser();
+        String username=request.getParameter("username");
+        User users = userService.queryUser(username);
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("user", user);
         return dataMap;

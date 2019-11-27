@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,16 +60,17 @@ public class OrderController {
      */
     @RequestMapping(value = "load_one", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public Map<String, Object> loadEmpData(@RequestParam("orderId") int orderId) {
+    public Order loadOrderData(@RequestParam("orderId") int orderId) {
+        Integer.parseInt(String.valueOf(orderId));
         Order order=orderService.getOrder(orderId);
-        Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("order", order);
-        return dataMap;
+        System.out.println("#########"+orderId+"##########");
+        return order;
     }
     //修改订单
     @RequestMapping("updateOrder")
     public String updateOrder(Order order){
         int row=orderService.updateOrder(order);
+       // System.out.println("#########"+order+"##########");
         return "redirect:/order/update-order-result.jsp？row="+row;
     }
 }

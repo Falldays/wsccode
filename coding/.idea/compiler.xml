@@ -9,8 +9,5 @@
         <module name="qstssm" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="qstssm" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
