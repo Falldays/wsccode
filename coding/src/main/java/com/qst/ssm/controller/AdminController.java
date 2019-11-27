@@ -105,6 +105,11 @@ public class AdminController {
         return "redirect:/admin/update_admin_result.jsp?rows="+rows;
     }
 
+    /**
+     * 商品管理
+     * @param pdId
+     * @return
+     */
     @RequestMapping(value = "load_product",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public Map<String,Object> loadProduct(@RequestParam("pd_id") int pdId){
@@ -117,5 +122,32 @@ public class AdminController {
     public String updateProduct(Product product){
         int rows=adminService.updateProduct(product);
         return "redirect:/product/update_product_result.jsp?rows="+rows;
+    };
+    /**
+     * 添加商品
+     * @param product
+     * @return
+     */
+    @RequestMapping("addproduct")
+    public String addProduct(Product product){
+        int rows=adminService.insertProduct(product);
+        return "redirect:/product/add_product_result.jsp?rows="+rows;
+    };
+    /**
+     * 查询商品
+     * @param model
+     * @return
+     */
+    @RequestMapping("queryproduct")
+    public String productQuery(Model model){
+        List<Product> productList=adminService.queryProduct();
+        model.addAttribute("productList", productList);
+        return "/product/query_product.jsp";
+    };
+
+    @RequestMapping("deleteproduct")
+    public String productDelete(@RequestParam("pd_id")int pdId){
+        int rows=adminService.deleteProduct(pdId);
+        return "redirect:/product/delete_product_result.jsp?rows="+rows;
     };
 }

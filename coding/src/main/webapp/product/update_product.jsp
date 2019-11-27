@@ -13,7 +13,7 @@
 
     <script>
         $(function () {
-            //利用jQuery AJAX加载部门数据和当前员工数据
+            //利用jQuery AJAX加载部门数据和当前商品数据
             $.ajax({
                 url: '/admin/load_product',//请求URL
                 data: {pd_id: '${param.pd_id}'},//请求参数
@@ -22,14 +22,14 @@
                 success: function (data) {
                     //请求成功,data表示从服务获取的数据
                     console.info(data)
-                    //获取员工数据
+                    //获取商品数据
                     var product=data.product;
                     if($.isEmptyObject(product)){
                         alert("该商品不存在或已被删除");
                         $('input,select').attr('disabled',true);
                         return;
                     }
-                    //设置员工数据
+                    //设置商品数据
                     $('input[name="pdthreeId"]').val(product.pdthreeId);
                     $('input[name="pdNo"]').val(product.pdNo);
                     $('input[name="pdName"]').val(product.pdName);
@@ -54,7 +54,7 @@
         <li><h3>修改商品</h3></li>
         <li>商品编号:<input type="text" name="pdNo" required ></li>
         <li>商品名称:<input type="text" name="pdName" required></li>
-        <li>商品分类:<input type="text" name="pdthreeId" required></li>
+        <li>商品三级分类ID:<input type="text" name="pdthreeId" required></li>
         <li>入库时间:<input type="date" name="pdDate" required></li>
         <li>价格:<input type="number" name="pdPrice" required></li>
         <%--<li><div>图片:<input type="text" name="pdCover"><image id="img01"/></div></li>--%>

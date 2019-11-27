@@ -41,11 +41,10 @@
         <div class="title"><span><img src="css/skin/images/leftico03.png"/></span>商品管理</div>
         <ul class="menuson">
             <li><cite></cite>
-                <a href="dep/add_dep.html" target="rightFrame">添加商品</a><i></i></li>
+                <a href="/product/add_product.jsp" target="rightFrame">添加商品</a><i></i></li>
             <li><cite></cite>
-                <a href="dep/query_dep.html" target="rightFrame">查询商品</a><i></i></li>
-            <li><cite></cite>
-                <a href="dep/query_dep.html" target="rightFrame">修改商品</a><i></i></li>
+                <a href="/admin/queryproduct" target="rightFrame">查询商品</a><i></i></li>
+
         </ul>
     </dd>
     <dd>
