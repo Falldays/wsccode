@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository("productDao")
 public class ProductDaoImpl implements IProductDao {
     @Autowired
