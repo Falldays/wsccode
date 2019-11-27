@@ -9,25 +9,97 @@
 <html>
 <head>
     <title>添加商品</title>
+    <link rel="stylesheet" href="../res/bootstrap/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../res/bootstrap/datetimepicker/css/bootstrap-datetimepicker.min.css" type="text/css" />
+    <link rel="stylesheet" href="../res/My97DatePicker/skin/WdatePicker.css" />
+    <script type="text/javascript" src="../res/bootstrap/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../res/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../res/bootstrap/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="../res/bootstrap/datetimepicker/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="../res/My97DatePicker/WdatePicker.js"></script>
 </head>
 <body>
-<form action="/admin/addproduct" method="post">
-    <ul style="list-style: none">
-        <li><h3>添加商品</h3></li>
-        <li>商品编号:<input type="text" name="pdNo" required ></li>
-        <li>商品名称:<input type="text" name="pdName" required></li>
-        <li>商品三级分类ID:<input type="text" name="pdthreeId" required></li>
-        <li>入库时间:<input type="date" name="pdDate" required></li>
-        <li>价格:<input type="number" name="pdPrice" required></li>
-        <li>图片:<input type="text" name="pdCover"required></li>
-        <li>
-            <!-- 在页面隐藏员工ID-->
-            <input type="hidden" name="pdId" required>
-            <input type="submit" value="添加商品">&nbsp;&nbsp;
-            <input type="reset" value="重新填写">
+<ol class="breadcrumb">
+    <li>当前位置:添加商品</li>
+</ol>
+<div id="alertMessage">
+</div>
+<div id="scrollContent" style="width: 99%">
+    <form action="/admin/addproduct" method="post">
+        <div class="form-group">
+            <div class="row">
+                <label class="control-label col-md-2" style="text-align: right;">商品编号:</label>
+                <div class="col-sm-3">
+                    <input type="text" name="pdNo" required >
+                </div>
+                <div class="col-sm-1">
+                    <span style="color:rgb(255,0,0)">*</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="control-label col-md-2" style="text-align: right;">商品名称:</label>
+                <div class="col-sm-3">
+                    <input type="text" name="pdName" required>
+                </div>
+                <div class="col-sm-1">
+                    <span style="color:rgb(255,0,0)">*</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="control-label col-md-2" style="text-align: right;">商品三级分类ID:</label>
+                <div class="col-sm-3">
+                    <input type="text" name="pdthreeId" required>
+                </div>
+                <div class="col-sm-1">
+                    <span style="color:rgb(255,0,0)">*</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="control-label col-md-2" style="text-align: right;">入库时间:</label>
+                <div class="col-sm-3">
+                    <input type="date" name="pdDate" required>
+                </div>
+                <div class="col-sm-1">
+                    <span style="color:rgb(255,0,0)">*</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="control-label col-md-2" style="text-align: right;">价格:</label>
+                <div class="col-sm-3">
+                    <input type="number" name="pdPrice" required>
+                </div>
+                <div class="col-sm-1">
+                    <span style="color:rgb(255,0,0)">*</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="control-label col-md-2" style="text-align: right;">图片:</label>
+                <div class="col-sm-3">
+                    <input type="text" name="pdCover"required>
+                </div>
+                <div class="col-sm-1">
+                    <span style="color:rgb(255,0,0)">*</span>
+                </div>
+            </div>
+        </div>
 
-        </li>
-    </ul>
-</form>
+        <div class="modal-footer">
+
+            <input type="hidden" name="pdId" required>
+            <input type="submit" value="添加商品" class="btn btn-primary">&nbsp;&nbsp;
+            <input type="reset" value="重新填写" class="btn btn-primary">
+        </div>
+    </form>
+</div>
 </body>
 </html>
