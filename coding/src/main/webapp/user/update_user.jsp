@@ -29,7 +29,6 @@
                         return;
                     }
                     //设置员工数据
-                    $('input[name="userNo"]').val(user.userNo);
                     $('input[name="userName"]').val(user.userName);
                     $('input[name="userNc"]').val(user.userNc);
                     $('input[name="sex"]').val(user.sex);
@@ -48,10 +47,9 @@
     </script>
 </head>
 <body>
-<form action="/emp/update" method="post">
+<form action="/user/update" method="post">
     <ul style="list-style: none">
         <li><h3>修改用户</h3></li>
-        <li>用户编号:<input type="text" name="userNo" required></li>
         <li>用户姓名:<input type="text" name="userName" required></li>
         <li>用户昵称:<input type="text" name="userNc" required></li>
         <li>用户性别:
@@ -61,8 +59,8 @@
         <li>手机号码:<input type="tel" name="tel" required></li>
         <li>出生日期:<input type="date" name="birthday" required></li>
             <!-- 在页面隐藏员工ID-->
-            <input type="hidden" name="empId" value="${param.user_id}">
-            <input type="submit" value="修改员工">&nbsp;&nbsp;
+            <input type="hidden" name="userId" value="${param.user_id}">
+            <input type="submit" value="修改会员">&nbsp;&nbsp;
             <input type="reset" value="重新填写">
         </li>
     </ul>

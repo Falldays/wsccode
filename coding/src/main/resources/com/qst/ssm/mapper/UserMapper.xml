@@ -67,8 +67,8 @@
         update  j_user
         set     user_name=#{userName},
                 user_nc=#{userNc},
-                user_tel=#{tel},
                 user_sex=#{sex},
+                user_tel=#{tel},
                 user_date=#{birthday}
         where user_id=#{userId}
      ]]>
