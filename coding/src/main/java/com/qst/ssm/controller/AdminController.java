@@ -9,10 +9,12 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -105,24 +107,7 @@ public class AdminController {
         return "redirect:/admin/update_admin_result.jsp?rows=" + rows;
     }
 
-    /**
-     * 商品管理
-     * @param pdId
-     * @return
-     */
-    @RequestMapping(value = "load_product",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
-    public Map<String,Object> loadProduct(@RequestParam("pd_id") int pdId){
-        Product product=adminService.getProduct(pdId);
-        Map<String,Object> dataMap=new HashMap<>();
-        dataMap.put("product",product);
-        return dataMap;
-    }
-    @RequestMapping("updateproduct")
-    public String updateProduct(Product product){
-        int rows=adminService.updateProduct(product);
-        return "redirect:/product/update_product_result.jsp?rows="+rows;
-    };
+
     /**
      * 管理员登录
      * @param admin
@@ -150,6 +135,12 @@ public class AdminController {
         model.addAttribute("msg","用户名或密码错误，请重新登录！");
         return  href="/adminLogin.jsp";
     }
+    @RequestMapping(value = "/logout")
+    public String logout(HttpSession session)throws Exception{
+        session.removeAttribute("adminId");
+        session.invalidate();
+        return "redirect:/admin/login";
+    }
 
     /**
      * 查询商品
@@ -169,10 +160,23 @@ public class AdminController {
         int rows=adminService.deleteProduct(pdId);
         return "redirect:/product/delete_product_result.jsp?rows="+rows;
     };
-    @RequestMapping(value = "/logout")
-    public String logout(HttpSession session)throws Exception{
-        session.removeAttribute("adminId");
-        session.invalidate();
-        return "redirect:/admin/login";
+    /**
+     * 商品管理
+     * @param pdId
+     * @return
+     */
+    @RequestMapping(value = "load_product",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public Map<String,Object> loadProduct(@RequestParam("pd_id") int pdId){
+        Product product=adminService.getProduct(pdId);
+        Map<String,Object> dataMap=new HashMap<>();
+        dataMap.put("product",product);
+        return dataMap;
     }
+    @RequestMapping("updateproduct")
+    public String updateProduct(Product product){
+        int rows=adminService.updateProduct(product);
+        return "redirect:/product/update_product_result.jsp?rows="+rows;
+    };
+
 }
