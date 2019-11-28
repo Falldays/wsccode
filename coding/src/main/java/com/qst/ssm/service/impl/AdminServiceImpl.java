@@ -57,6 +57,16 @@ public class AdminServiceImpl implements IAdminService{
     public int updatepass(int adminId) {
         return 0;
     }
+
+    /**
+     * 根据admin账号密码获取admin信息
+     * @param admin
+     * @return
+     */
+    @Override
+    public Admin login(Admin admin) {
+        return adminDao.login(admin);
+    }
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public List<Product> queryProduct() {
@@ -86,4 +96,11 @@ public class AdminServiceImpl implements IAdminService{
     public int updateProduct(Product product) {
         return productDao.updateProduct(product);
     }
+
+    @Override
+    public int logout(int adminId) {
+        return adminDao.logout(adminId);
+    }
+
+
 }

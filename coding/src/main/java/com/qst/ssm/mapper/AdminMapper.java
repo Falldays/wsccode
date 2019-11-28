@@ -47,4 +47,12 @@ public interface AdminMapper {
      */
     int updateAdmin(Admin admin);
 
+    /**
+     * 根据admin账号密码获取admin信息
+     * @param admin
+     * @return
+     */
+    Admin login(Admin admin);
+
+    int logout(int adminId);
 }

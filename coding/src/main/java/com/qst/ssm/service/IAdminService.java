@@ -49,6 +49,14 @@ public interface IAdminService {
      * @return
      */
     int updatepass(int adminId);
+
+    /**
+     * 根据admin账号密码获取admin信息
+     * @param admin
+     * @return
+     */
+    Admin login(Admin admin);
+
     /**
      * 查询所有商品
      * @return
@@ -81,4 +89,11 @@ public interface IAdminService {
      * @return
      */
     int updateProduct(Product product);
+
+    /**
+     * 退出
+     * @param adminId
+     * @return
+     */
+    int logout(int adminId);
 }

@@ -39,4 +39,18 @@ public interface IUserDao {
      * @return
      */
     int updateUser(User user);
+
+    /**
+     * 根据用户账号密码获取用户信息
+     * @param user
+     * @return
+     */
+    User login(User user);
+
+    /**
+     * 用户退出
+     * @param userId
+     * @return
+     */
+    int logout(int userId);
 }

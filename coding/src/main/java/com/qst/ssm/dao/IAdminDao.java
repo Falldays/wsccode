@@ -40,4 +40,12 @@ public interface IAdminDao {
      * @return
      */
     int updateAdmin(Admin admin);
+    /**
+     * 根据用户账号密码获取用户信息
+     * @param admin
+     * @return
+     */
+    Admin login(Admin admin);
+
+    int logout(int adminId);
 }

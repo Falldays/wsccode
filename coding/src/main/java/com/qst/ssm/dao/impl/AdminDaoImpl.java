@@ -39,4 +39,19 @@ public class AdminDaoImpl implements IAdminDao {
     public int updateAdmin(Admin admin) {
         return adminMapper.updateAdmin(admin);
     }
+
+    /**
+     * 根据admin账号密码获取admin信息
+     * @param admin
+     * @return
+     */
+    @Override
+    public Admin login(Admin admin) {
+        return adminMapper.login(admin);
+    }
+
+    @Override
+    public int logout(int adminId) {
+        return adminMapper.logout(adminId);
+    }
 }

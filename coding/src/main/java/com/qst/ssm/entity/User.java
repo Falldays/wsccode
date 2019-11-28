@@ -1,5 +1,7 @@
 package com.qst.ssm.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -29,7 +31,8 @@ public class User {
     /**
      * 出生日期
      */
-    private Date brithday;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birthday;
     /**
      * 密码
      */
@@ -38,88 +41,72 @@ public class User {
     public User() {
     }
 
-    /**
-     * 用户构造方法
-     * @param userId
-     * @param userName
-     * @param sex
-     * @param tel
-     * @param userNc
-     * @param brithday
-     * @param password
-     */
-
-    public User(Integer userId, String userName, Integer sex, String tel, String userNc, Date brithday, String password) {
+    public User(Integer userId, String userName, Integer sex, String tel, String userNc, Date birthday, String password) {
         this.userId = userId;
         this.userName = userName;
         this.sex = sex;
         this.tel = tel;
         this.userNc = userNc;
-        this.brithday = brithday;
+        this.birthday = birthday;
         this.password = password;
     }
 
-    /**
-     * Userget和set方法
-     */
     public Integer getUserId() {
         return userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public Integer getSex() {
-        return sex;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public String getUserNc() {
-        return userNc;
-    }
-
-    public Date getBrithday() {
-        return brithday;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Integer getSex() {
+        return sex;
     }
 
     public void setSex(Integer sex) {
         this.sex = sex;
     }
 
+    public String getTel() {
+        return tel;
+    }
+
     public void setTel(String tel) {
         this.tel = tel;
+    }
+
+    public String getUserNc() {
+        return userNc;
     }
 
     public void setUserNc(String userNc) {
         this.userNc = userNc;
     }
 
-    public void setBrithday(Date brithday) {
-        this.brithday = brithday;
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
-    /**
-     * toString方法
-     */
+
     @Override
     public String toString() {
         return "User{" +
@@ -128,7 +115,7 @@ public class User {
                 ", sex=" + sex +
                 ", tel='" + tel + '\'' +
                 ", userNc='" + userNc + '\'' +
-                ", brithday=" + brithday +
+                ", birthday=" + birthday +
                 ", password='" + password + '\'' +
                 '}';
     }

@@ -9,10 +9,12 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,10 +103,63 @@ public class AdminController {
      */
     @RequestMapping("update")
     public String updateAdmin(Admin admin) {
-        int rows =adminService.updateAdmin(admin);
-        return "redirect:/admin/update_admin_result.jsp?rows="+rows;
+        int rows = adminService.updateAdmin(admin);
+        return "redirect:/admin/update_admin_result.jsp?rows=" + rows;
     }
 
+
+    /**
+     * 管理员登录
+     * @param admin
+     * @param model
+     * @param session
+     * @return
+             */
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public String login(Admin admin, Model model, HttpSession session){
+        Admin admin1 = adminService.login(admin);
+        String href= null;
+        if (admin1==null){
+            //出现异常
+            model.addAttribute("msg","发生异常，请重新登录！");
+            href = "/adminLogin.jsp";
+        }else if (admin1.getAdminId()==null){
+            //不存在
+            model.addAttribute("msg","账号或密码错误，请重新登录！");
+            return href = "/adminLogin.jsp";
+        }else {
+            //登录成功
+            session.setAttribute("admin",admin);
+            return href = "/left.jsp";
+        }
+        model.addAttribute("msg","用户名或密码错误，请重新登录！");
+        return  href="/adminLogin.jsp";
+    }
+    @RequestMapping(value = "/logout")
+    public String logout(HttpSession session)throws Exception{
+        session.removeAttribute("adminId");
+        session.invalidate();
+        return "redirect:/admin/login";
+    }
+
+    /**
+     * 查询商品
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("queryproduct")
+    public String productQuery(Model model){
+        List<Product> productList=adminService.queryProduct();
+        model.addAttribute("productList", productList);
+        return "/product/query_product.jsp";
+    };
+
+    @RequestMapping("deleteproduct")
+    public String productDelete(@RequestParam("pd_id")int pdId){
+        int rows=adminService.deleteProduct(pdId);
+        return "redirect:/product/delete_product_result.jsp?rows="+rows;
+    };
     /**
      * 商品管理
      * @param pdId
@@ -123,31 +178,5 @@ public class AdminController {
         int rows=adminService.updateProduct(product);
         return "redirect:/product/update_product_result.jsp?rows="+rows;
     };
-    /**
-     * 添加商品
-     * @param product
-     * @return
-     */
-    @RequestMapping("addproduct")
-    public String addProduct(Product product){
-        int rows=adminService.insertProduct(product);
-        return "redirect:/product/add_product_result.jsp?rows="+rows;
-    };
-    /**
-     * 查询商品
-     * @param model
-     * @return
-     */
-    @RequestMapping("queryproduct")
-    public String productQuery(Model model){
-        List<Product> productList=adminService.queryProduct();
-        model.addAttribute("productList", productList);
-        return "/product/query_product.jsp";
-    };
 
-    @RequestMapping("deleteproduct")
-    public String productDelete(@RequestParam("pd_id")int pdId){
-        int rows=adminService.deleteProduct(pdId);
-        return "redirect:/product/delete_product_result.jsp?rows="+rows;
-    };
 }

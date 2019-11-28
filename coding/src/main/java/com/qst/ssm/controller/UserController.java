@@ -10,10 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,7 +81,7 @@ public class UserController {
     @RequestMapping("add")
     public String addUser(User user) {
         int rows = userService.insertUser(user);
-        return "redirect:/user/info?rows=" + rows;
+        return "redirect:/user/add_user_result.jsp?rows=" + rows;
     }
 
     /**
@@ -110,6 +112,48 @@ public class UserController {
     public String updateUser(User user) {
         int rows =userService.updateUser(user);
         return "redirect:/user/update_user_result.jsp?rows="+rows;
+    }
+
+    /**
+     * 用户登录
+     * @param user
+     * @param model
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public String login(User user, Model model, HttpSession session){
+        User user1 = userService.login(user);
+        String href= null;
+        if (user1==null){
+            //出现异常
+            model.addAttribute("msg","发生异常，请重新登录！");
+            href = "/userLogin.jsp";
+        }else if (user1.getUserId()==null){
+            //不存在
+            model.addAttribute("msg","账号或密码错误，请重新登录！");
+            return href = "/userLogin.jsp";
+        }else {
+            //登录成功
+            session.setAttribute("user",user);
+            return href = "/index.jsp";
+        }
+        model.addAttribute("msg","用户名或密码错误，请重新登录！");
+        System.out.println("用户名或密码错误，请重新登录");
+        return  href="/userLogin.jsp";
+    }
+
+    /**
+     * 用户退出
+     * @param session
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/logout")
+    public String logout(HttpSession session)throws Exception{
+        session.removeAttribute("userId");
+        session.invalidate();
+        return "redirect:/userLogin.jsp";
     }
 
 }

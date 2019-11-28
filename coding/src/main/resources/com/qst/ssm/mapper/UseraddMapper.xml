@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qst.ssm.mapper.UseraddMapper">
+
+    <!-- 查询用户所有收货地址-->
+    <select id="queryUseradd" resultType="useradd">
+        <![CDATA[
+        select
+            add_id as useraddId,
+            user_id as userId,
+            add_name as addName,
+            add_telephone as addTelephone,
+            add_address as addAddress
+        from
+            j_user_address
+        ]]>
+    </select>
+
+    <select id="findUseraddbyaddId"  resultType="useradd" parameterType="Integer">
+        <![CDATA[
+        select
+            add_id as useraddId,
+            user_id as userId,
+            add_name as addName,
+            add_telephone as addTelephone,
+            add_address as addAddress
+        from
+            j_user_address
+        where add_id=#{useraddId}
+       ]]>
+    </select>
+
+    <!-- 根据用户ID加载用户收货地址-->
+    <select id="getUseradd"  resultType="useradd" parameterType="int">
+        <![CDATA[
+        select
+            add_id as useraddId,
+            user_id as userId,
+            add_name as addName,
+            add_telephone as addTelephone,
+            add_address as addAddress
+        from
+            j_user_address
+        where user_id=#{user_id}
+       ]]>
+    </select>
+
+    <!-- 添加用户收货地址-->
+    <insert id="insertUseradd" parameterType="useradd">
+      <![CDATA[
+        insert into j_user_address (
+            user_id,
+            add_name,
+            add_telephone,
+            add_address
+        )
+        values
+        (
+            #{userId},
+            #{addName},
+            #{addTelephone},
+            #{addAddress}
+         )
+      ]]>
+    </insert>
+
+
+    <!-- 根据地址ID删除用户收货地址-->
+    <delete id="delUseradd" parameterType="int">
+        <![CDATA[
+        delete from j_user_address where add_id=#{useraddId}
+      ]]>
+    </delete>
+
+
+    <!-- 根据地址ID修改用户收货地址信息-->
+    <update id="updUseradd" parameterType="useradd">
+    <![CDATA[
+        update  j_user_address
+        set     add_name=#{addName},
+                add_telephone=#{addTelephone},
+                add_address=#{addAddress}
+        where add_id=#{useraddId}
+     ]]>
+    </update>
+</mapper>

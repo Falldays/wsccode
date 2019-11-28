@@ -60,10 +60,11 @@
                             <td>${admin.pdNo}</td>
                             <td>${admin.pdName}</td>
                             <td>${admin.pdthreeId}</td>
-                            <td>${admin.pdPrice}</td>
+
                             <!-- 利用格式化标签输出出生日期-->
                             <td><fmt:formatDate value="${admin.pdDate}" pattern="yyyy-MM-dd"/></td>
                             <%--<td>${admin.pdCover}</td>--%>
+                            <td>${admin.pdPrice}</td>
                             <td>
                                 <a href="#" onclick="deleteProduct(${admin.pdId},'${admin.pdName}')">
                                     <button type="button" class="btn btn-danger" }>

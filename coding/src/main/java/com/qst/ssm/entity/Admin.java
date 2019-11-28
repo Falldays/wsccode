@@ -2,7 +2,7 @@ package com.qst.ssm.entity;
 
 public class Admin {
     //管理员ID
-    private int adminId;
+    private Integer adminId;
     //管理员NO
     private String adminNo;
     //管理员姓名
@@ -10,14 +10,14 @@ public class Admin {
     //管理员密码
     private String password;
     //管理员电话
-    private int mobile;
+    private String mobile;
     //管理员性别
     private int sex;
 
     public Admin() {
     }
 
-    public Admin(int adminId, String adminNo, String adminName, String password, int mobile, int sex) {
+    public Admin(Integer adminId, String adminNo, String adminName, String password, String mobile, int sex) {
         this.adminId = adminId;
         this.adminNo = adminNo;
         this.adminName = adminName;
@@ -26,11 +26,11 @@ public class Admin {
         this.sex = sex;
     }
 
-    public int getAdminId() {
+    public Integer getAdminId() {
         return adminId;
     }
 
-    public void setAdminId(int adminId) {
+    public void setAdminId(Integer adminId) {
         this.adminId = adminId;
     }
 
@@ -58,11 +58,11 @@ public class Admin {
         this.password = password;
     }
 
-    public int getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(int mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
