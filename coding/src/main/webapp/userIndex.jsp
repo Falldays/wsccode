@@ -101,9 +101,8 @@
 <body>
 <div class="top" id="item4">
     <div class="container clearfix">
-        <li><a href="#">${param.msg}</a></li>
         <ul class="clearfix fr">
-            <li><a href="#">您好，请登录</a></li>
+            <li><a href="userLogin.jsp">您好，请登录</a></li>
             <li><a href="#">免费注册</a></li>
             <li><a href="#">我的订单</a></li>
             <li><a href="#">我的收藏夹</a></li>
@@ -117,10 +116,10 @@
 <div class="header">
     <div class="container clearfix">
         <div class="logo fl">
-            <a href="#"><img src="images/logo4.png" alt=""/></a>
+            <a href="userIndex.jsp"><img src="images/logo4.png" alt=""/></a>
         </div>
         <div class="seacher fl">
-            <form action="productSearch/productSearchByName" method="post">
+            <form action="/product_likesearch.jsp" method="post">
                 <input type="text" placeholder="小伙伴，你想找什么?" name="pdName"/><input type="submit" value="搜 索"/>
             </form>
             <p>热门搜索：
@@ -174,10 +173,19 @@
                 </div> <a class="left carousel-control" href="#carousel-907766" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-907766" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
             </div>
         </div>
+
         <div class="col-md-3 column">
             <div class="mid">
                 <a href="#">
                     <img alt="" src="images/qz.png" style="height: 442px;"/>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3 column">
+            <div class="mid">
+                <a href="#">
+                    <img alt="" src="images/cd.webp" style="height: 442px;"/>
                 </a>
             </div>
         </div>
@@ -194,72 +202,72 @@
         <h1>好货小屋<span></span></h1>
         <div class="list fl">
             <ul class="one" id="ulId">
-                <li><a href="productSearch/productSearchByOneOrTwo?oneId=1">男鞋</a>
+                <li><a href="product_flsearch.jsp?oneId=1&name=男鞋">男鞋</a>
                     <ul class="two">
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=1">流行男鞋</a></li>
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=2">网络潮牌</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=1&name=流行男鞋">流行男鞋</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=2&name=网络潮牌">网络潮牌</a></li>
                     </ul>
                 </li>
-                <li><a href="productSearch/productSearchByOneOrTwo?oneId=2">个护清洁</a>
+                <li><a href="product_flsearch.jsp?oneId=2&name=个护清洁">个护清洁</a>
                     <ul class="two">
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=3">明星品牌</a></li>
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=4">纸品湿巾</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=3&name=明星品牌">明星品牌</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=4&name=纸品湿巾">纸品湿巾</a></li>
                     </ul>
                 </li>
-                <li><a href="productSearch/productSearchByOneOrTwo?oneId=3">手机数码</a>
+                <li><a href="product_flsearch.jsp?oneId=3&name=手机数码">手机数码</a>
                     <ul class="two">
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=5">手机</a></li>
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=10">手机配件</a></li>
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=11">摄影摄像</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=5&name=手机">手机</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=10&name=手机配件">手机配件</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=11&name=摄影摄像">摄影摄像</a></li>
                     </ul>
                 </li>
-                <li><a href="productSearch/productSearchByOneOrTwo?oneId=4">钟表珠宝</a>
+                <li><a href="product_flsearch.jsp?oneId=4&name=钟表珠宝">钟表珠宝</a>
                     <ul class="two">
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=12">腕表</a></li>
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=13">黄金</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=12&name=腕表">腕表</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=13&name=黄金">黄金</a></li>
                     </ul>
                 </li>
-                <li><a href="productSearch/productSearchByOneOrTwo?oneId=5">家用电器</a>
+                <li><a href="product_flsearch.jsp?oneId=5&name=家用电器">家用电器</a>
                     <ul class="two">
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=14">电视</a></li>
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=15">空调</a></li>
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=16">洗衣机</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=14&name=电视">电视</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=15&name=空调">空调</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=16&name=洗衣机">洗衣机</a></li>
                     </ul>
                 </li>
-                <li><a href="productSearch/productSearchByOneOrTwo?oneId=8">家居家具</a>
+                <li><a href="product_flsearch.jsp?oneId=8&name=家居家具">家居家具</a>
                     <ul class="two">
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=17">灯饰照明</a></li>
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=18">五金工具</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=17&name=灯饰照明">灯饰照明</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=18&name=五金工具">五金工具</a></li>
                     </ul>
                 </li>
-                <li><a href="productSearch/productSearchByOneOrTwo?oneId=9">运动户外</a>
+                <li><a href="product_flsearch.jsp?oneId=9&name=运动户外">运动户外</a>
                     <ul class="two">
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=19">运动鞋包</a></li>
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=20">运动服饰</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=19&name=运动鞋包">运动鞋包</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=20&name=运动服饰">运动服饰</a></li>
                     </ul>
                 </li>
-                <li><a href="productSearch/productSearchByOneOrTwo?oneId=14">男装</a>
+                <li><a href="product_flsearch.jsp?oneId=14&name=男装">男装</a>
                     <ul class="two">
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=21">羽绒服</a></li>
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=22">休闲裤</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=21&name=羽绒服">羽绒服</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=22&name=休闲裤">休闲裤</a></li>
                     </ul>
                 </li>
-                <li><a href="productSearch/productSearchByOneOrTwo?oneId=15">女装</a>
+                <li><a href="product_flsearch.jsp?oneId=15&name=女装">女装</a>
                     <ul class="two">
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=23">外套</a></li>
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=24">女士上衣</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=23&name=外套">外套</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=24&name=女士上衣">女士上衣</a></li>
                     </ul>
                 </li>
-                <li><a href="productSearch/productSearchByOneOrTwo?oneId=16">箱包手袋</a>
+                <li><a href="product_flsearch.jsp?oneId=16&name=箱包手袋">箱包手袋</a>
                     <ul class="two">
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=25">精品男包</a></li>
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=26">功能箱包</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=25&name=精品男包">精品男包</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=26&name=功能箱包">功能箱包</a></li>
                     </ul>
                 </li>
-                <li><a href="productSearch/productSearchByOneOrTwo?oneId=17">母婴童装</a>
+                <li><a href="product_flsearch.jsp?oneId=17&name=母婴童装">母婴童装</a>
                     <ul class="two">
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=27">婴童寝居</a></li>
-                        <li><a href="productSearch/productSearchByOneOrTwo?twoId=28">奶粉</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=27&name=婴童寝居">婴童寝居</a></li>
+                        <li><a href="product_flsearch.jsp?twoId=28&name=奶粉">奶粉</a></li>
                     </ul>
                 </li>
             </ul>
@@ -268,6 +276,7 @@
 
         </div>
     </div>
+
     <div class="jiaocai clearfix" id="item2">
         <h1>精挑细选<span></span></h1>
         <div class="swiper-container">
@@ -287,16 +296,16 @@
             });
         </script>
     </div>
+
     <div class="jiaocai clearfix" id="item3">
         <h1>你喜欢的<span></span></h1>
         <div class="book clearfix" style="margin: 0 auto;width: 1130px;" id="thirdId">
-
         </div>
     </div>
 
 </div>
 <div class="foot">
-    <div class="container">
+    <div class="container" >
 
         <div class="zhinan">
             <ul class="clearfix">
