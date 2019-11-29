@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
@@ -67,6 +68,27 @@ public class ProductSearchController {
         return dataMap;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "load2" ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Map<String,Object> load2(@RequestParam("pdName") String pdName){
+        Map<String,Object> map = new HashMap<>();
+        List<Product> productList = productSearchService.queryProductByName(pdName);
+        map.put("productList",productList);
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "load3" ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Map<String,Object> load3(@RequestParam("oneId") Integer oneId,@RequestParam("twoId") Integer twoId){
+        Map<String,Integer> map = new HashMap<>();
+        map.put("oneId",oneId);
+        map.put("twoId",twoId);
+        List<Product> productList = productSearchService.queryProductByOneOrTwo(map);
+        Map<String,Object> map3 = new HashMap<>();
+        map3.put("productList",productList);
+        return map3;
+    }
+
     /**
      * 根据商品名称模糊查询商品信息
      * @return
@@ -76,7 +98,7 @@ public class ProductSearchController {
         List<Product> productList = productSearchService.queryProductByName(pdName);
         System.out.println(productList);
         model.addAttribute("productList",productList);
-        return "redirect:/userIndex.jsp";
+        return "redirect:/product_likesearch.jsp";
     }
 
     /**
@@ -103,7 +125,7 @@ public class ProductSearchController {
         Product product = productSearchService.getProduct(pdId);
         System.out.println(product);
         model.addAttribute("product",product);
-        return "redirect:/userIndex.jsp";
+        return "/product_info.jsp";
     }
 
 }

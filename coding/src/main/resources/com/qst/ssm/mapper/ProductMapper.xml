@@ -26,6 +26,7 @@
             pd_three_id as pdthreeId,
             pd_no as pdNo,
             pd_name as pdName,
+            pd_number as pdNumber,
             pd_price as pdPrice,
             pd_cover as pdCover,
             pd_date as pdDate
