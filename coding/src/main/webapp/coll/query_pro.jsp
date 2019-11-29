@@ -5,22 +5,44 @@
   Time: 21:08
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"
+            +request.getServerName()+":"
+            +request.getServerPort()+path+"/";
+%>
+
+<base href="<%=basePath%>">
+
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="css/public.css" />
+    <meta charset="UTF-8">
+    <meta name="author" content="order by dede58.com"/>
+    <link rel="stylesheet" href="css/public.css"/>
     <link rel="stylesheet" href="css/index.css"/>
     <link rel="stylesheet" href="css/swiper3.07.min.css"/>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery-1.11.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-1.11.2.min.js"></script>
     <script src="js/myfocus-2.0.1.min.js"></script>
     <script src="js/main.js"></script>
+
+    <style>
+        body{
+            background-color:#FCFCFC;
+        }
+        .swiper-container {
+            width: 1100px;
+            height: 300px;
+            margin: 0 auto;
+        }
+    </style>
     <title>微商城 - 我的购物车</title>
 </head>
 <body>
@@ -28,14 +50,27 @@
 <div class="top" id="item4">
     <div class="container clearfix">
         <ul class="clearfix fr">
-            <li><a href="#">用户名</a></li>
-            <li><a href="#">我的微商城</a></li>
-            <li><a href="#">我的订单</a></li>
-            <li><a href="#">收藏夹</a></li>
+            <li><c:choose>
+                <c:when test="${empty sessionScope.user}">
+                    <span style="color: #FF0000"><a href="user/userLogin.jsp">您好，请登录</a></span>
+                </c:when>
+                <c:otherwise>
+                    <ul style="list-style: none">
+                        <li><b>${sessionScope.user.userName}</b></li>
+                    </ul>
+                </c:otherwise>
+            </c:choose>
+            </li>
+            <li><a href="#">免费注册</a></li>
+            <li><a href="/my-order.jsp">我的订单</a></li>
+            <li><a href="/collect/querypro">我的收藏夹</a></li>
+            <li><a href="/shop/queryshop">我的购物车</a></li>
             <li><a href="#">联系客服</a></li>
             <li><a href="#" style="border: none">网站导航</a></li>
         </ul>
     </div>
+</div>
+
 
 <div>
     <h2>收藏夹</h2>
