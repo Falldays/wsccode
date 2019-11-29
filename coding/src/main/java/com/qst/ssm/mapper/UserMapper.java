@@ -57,4 +57,11 @@ public interface UserMapper {
      * @return
      */
     int logout(int userId);
+ /**
+  * 查询所有用户
+  *
+  * @return
+  */
+  List<User> cxUser();
+
 }

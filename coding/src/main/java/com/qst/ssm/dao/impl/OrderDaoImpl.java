@@ -42,4 +42,9 @@ public class OrderDaoImpl implements IOrderDao {
     public Order getOrder(int orderId) {
         return orderMapper.getOrder(orderId);
     }
+
+    @Override
+    public List<Order> cxOrder() {
+        return orderMapper.cxOrder();
+    }
 }

@@ -11,9 +11,10 @@
          p.pd_price  as  pdPrice,
          x.order_price as orderPrice,
          x.express_no   as  expressNo,
-         x.create_time  as  createTime
+         x.create_time  as  createTime,
+         x.order_status as  orderStatus
     from
-    (select i.order_id,i.order_no,i.user_id,i.order_price,i.express_no,i.create_time,j.pd_id
+    (select i.order_id,i.order_no,i.user_id,i.order_price,i.express_no,i.create_time,i.order_status,j.pd_id
     from j_order i
     left join j_ordexx j on i.order_id=j.order_id
     where user_id=#{userId}) x
@@ -49,6 +50,7 @@
     <select id="getOrder" resultType="order" parameterType="int">
     <![CDATA[
         select
+        order_id as orderId,
         order_no as orderNo,
         user_id as userId,
         order_price as orderPrice,
@@ -85,5 +87,19 @@
         values(#{orderId},#{pdId},#{pdNumber},#{pdPrice})
         ]]>
     </insert>
+    <!-- 查询所有订单-->
+    <select id="cxOrder" resultType="order">
+    <![CDATA[
+      select
+      order_id as orderId,
+      order_no as orderNo,
+      user_id as userId,
+      order_price as orderPrice,
+      express_no as expressNo,
+      create_time as createTime,
+      order_status as orderStatus
+      from j_order
+      ]]>
+    </select>
 
 </mapper>

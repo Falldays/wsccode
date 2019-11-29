@@ -1,6 +1,5 @@
 package com.qst.ssm.controller;
 
-import cn.hutool.crypto.digest.DigestUtil;
 import com.qst.ssm.entity.User;
 import com.qst.ssm.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +33,18 @@ public class UserController {
      * 查询所有用户
      * @return
      */
+    @RequestMapping("cxUser")
+    public String cxUser(Model model){
+        List<User> userList=userService.cxUser();
+        model.addAttribute("userList",userList);
+        return "/user/query_user.jsp";
+    }
+    @RequestMapping("xgUser")
+    public String xgUser(Model model){
+        List<User> userList=userService.cxUser();
+        model.addAttribute("userList",userList);
+        return "/user/query+update-user.jsp";
+    }
     @RequestMapping("query")
     public String queryUser(HttpServletRequest request) {
         String username=request.getParameter("username");
@@ -121,26 +132,26 @@ public class UserController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @RequestMapping(value = "login",method = RequestMethod.POST)
     public String login(User user, Model model, HttpSession session){
         User user1 = userService.login(user);
         String href= null;
         if (user1==null){
             //出现异常
             model.addAttribute("msg","发生异常，请重新登录！");
-            href = "/userLogin.jsp";
+              return "/user/userLogin.jsp";
         }else if (user1.getUserId()==null){
             //不存在
             model.addAttribute("msg","账号或密码错误，请重新登录！");
-            return href = "/userLogin.jsp";
-        }else {
+              return "/user/userLogin.jsp";
+        }//else {
             //登录成功
-            session.setAttribute("user",user);
-            return href = "/index.jsp";
-        }
+            session.setAttribute("user",user1);
+             return   "redirect:/index.jsp";
+       /* }
         model.addAttribute("msg","用户名或密码错误，请重新登录！");
         System.out.println("用户名或密码错误，请重新登录");
-        return  href="/userLogin.jsp";
+        return  href="/userLogin.jsp";*/
     }
 
     /**

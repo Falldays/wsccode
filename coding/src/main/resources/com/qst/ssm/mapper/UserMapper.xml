@@ -4,6 +4,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qst.ssm.mapper.UserMapper">
     <!-- 查询所有用户-->
+    <select id="cxUser" resultType="user">
+        <![CDATA[
+        select
+            user_id as userid,
+            user_name as username,
+            user_nc as usernc,
+            user_tel as tel,
+            user_sex as sex,
+            user_date as birthday,
+            user_password as password
+        from
+            j_user
+        ]]>
+    </select>
+    <!-- 查询所有用户-->
     <select id="queryUser" resultType="user">
         <![CDATA[
         select

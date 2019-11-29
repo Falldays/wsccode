@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: 29067
-  Date: 2019/11/21
-  Time: 15:22
+  User: kiss
+  Date: 2019/11/18
+  Time: 20:07
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,68 +11,67 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>待收货</title>
+    <title>用户信息查询</title>
     <link rel="stylesheet" href="../res/bootstrap/css/bootstrap.min.css" type="text/css"/>
     <script type="text/javascript" src="../res/bootstrap/js/jquery.min.js"></script>
     <script type="text/javascript" src="../res/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<ol class="breadcrumb">
-    <li>当前位置:待收货订单</li>
-</ol>
 <div class="container">
     <div id="scrollContent" style="width: 99%">
         <table class="table table-hover table-striped table-bordered">
             <thead>
             <tr class="info">
                 <th class="text-center">
-                    <span>订单状态</span>
+                    <span>用户编号</span>
                 </th>
                 <th class="text-center">
-                    <span>订单编号</span>
+                    <span>用户姓名</span>
                 </th>
                 <th class="text-center">
-                    <span>商品名称</span>
+                    <span>用户昵称</span>
                 </th>
                 <th class="text-center">
-                    <span>商品价格</span>
+                    <span>性别</span>
                 </th>
                 <th class="text-center">
-                    <span>订单总价</span>
+                    <span>手机号码</span>
                 </th>
                 <th class="text-center">
-                    <span>创建时间</span>
+                    <span>出生日期</span>
+                </th>
+                <th class="text-center">
+                    <span>操作</span>
                 </th>
             </tr>
             </thead>
-            <tbody>
             <c:choose>
-                <c:when test="${ empty requestScope.mapList}">
+                <c:when test="${ empty requestScope.userList}">
                     <tr>
                         <td colspan="7" align="center"><span style="color: #0000FF">未查询到数据</span></td>
                     </tr>
                 </c:when>
                 <c:otherwise>
-                    <c:forEach items="${requestScope.mapList}" var="map">
+                    <c:forEach items="${requestScope.userList}" var="user">
                         <tr>
-                            <td>${map.orderStatus}</td>
-                            <td>${map.orderNo}</td>
-                            <td>${map.pdName}</td>
-                            <td>${map.pdPrice}</td>
-                            <td>${map.orderPrice}</td>
+                            <td>${user.userId}</td>
+                            <td>${user.userName}</td>
+                            <td>${user.userNc}</td>
+                            <td>${1==user.sex?'男':'女'}</td>
+                            <td>${user.tel}</td>
                             <!-- 利用格式化标签输出出生日期-->
-                            <td><fmt:formatDate value="${map.createTime}" pattern="yyyy-MM-dd"/></td>
+                            <td><fmt:formatDate value="${user.birthday}" pattern="yyyy-MM-dd"/></td>
+                            <td>
+                                <a href="/user/update_user.jsp?user_id=${user.userId}">
+                                    <button type="button" class="btn btn-primary" ><span>修改</span></button></a>
+                            </td>
                         </tr>
                     </c:forEach>
                 </c:otherwise>
             </c:choose>
-            </tbody>
         </table>
     </div>
-</div>
-</table>
-<div>
-共查询到:<span style="color: #1f33ff">${fn:length(requestScope.mapList)}</span>条记录
+    共查询到:<span style="color: #1f33ff">${fn:length(requestScope.adminList)}</span>条记录
 </div>
 </body>
 </html>

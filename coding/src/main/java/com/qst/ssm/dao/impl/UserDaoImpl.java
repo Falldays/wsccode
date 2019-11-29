@@ -59,4 +59,13 @@ public class UserDaoImpl implements IUserDao {
     public int logout(int userId) {
         return userMapper.logout(userId);
     }
+    /**
+     * 查询所有用户
+     *
+     * @return
+     */
+    @Override
+    public List<User> cxUser() {
+        return userMapper.cxUser();
+    }
 }

@@ -41,11 +41,10 @@
         <div class="title"><span><img src="css/skin/images/leftico03.png"/></span>商品管理</div>
         <ul class="menuson">
             <li><cite></cite>
-                <a href="dep/add_dep.html" target="rightFrame">添加商品</a><i></i></li>
+                <a href="/product/add_product.jsp" target="rightFrame">添加商品</a><i></i></li>
             <li><cite></cite>
-                <a href="dep/query_dep.html" target="rightFrame">查询商品</a><i></i></li>
-            <li><cite></cite>
-                <a href="dep/query_dep.html" target="rightFrame">修改商品</a><i></i></li>
+                <a href="/admin/queryproduct" target="rightFrame">查询商品</a><i></i></li>
+
         </ul>
     </dd>
     <dd>
@@ -65,11 +64,9 @@
         <ul class="menuson">
             <li></li>
             <li><cite></cite>
-                <a href="emp/query_emp.html" target="rightFrame">查询会员</a><i></i></li>
+                <a href="user/cxUser" target="rightFrame">查询会员</a><i></i></li>
             <li><cite></cite>
-                <a href="emp/my_info.html" target="rightFrame">修改会员</a><i></i></li>
-            <li><cite></cite>
-                <a href="emp/update_password.html" target="rightFrame">重置会员密码</a><i></i></li>
+                <a href="user/xgUser" target="rightFrame">修改会员</a><i></i></li>
         </ul>
     </dd>
     <dd>
@@ -78,9 +75,9 @@
         <ul class="menuson">
             <li></li>
             <li><cite></cite>
-                <a href="emp/query_emp.html" target="rightFrame">查询订单</a><i></i></li>
+                <a href="order/cxOrder" target="rightFrame">查询订单</a><i></i></li>
             <li><cite></cite>
-                <a href="emp/my_info.html" target="rightFrame">修改订单</a><i></i></li>
+                <a href="/order/quOrder" target="rightFrame">修改订单</a><i></i></li>
         </ul>
     </dd>
     <dd>

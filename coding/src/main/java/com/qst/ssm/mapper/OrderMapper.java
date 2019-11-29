@@ -18,5 +18,7 @@ public interface OrderMapper {
     //修改订单
     int updateOrder(Order order);
     //根据订单ID查询订单信息
-    Order getOrder(@Param("orderId") int orderId);
+    Order getOrder(int orderId);
+    //查询所有订单
+    List<Order> cxOrder();
 }

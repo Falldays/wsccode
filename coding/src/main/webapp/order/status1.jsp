@@ -11,19 +11,41 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>我的订单</title>
+    <title>待发货</title>
+    <link rel="stylesheet" href="../res/bootstrap/css/bootstrap.min.css" type="text/css"/>
+    <script type="text/javascript" src="../res/bootstrap/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../res/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div>
-    <table width="600" border="1" cellspacing="0">
-        <tr>
-            <th>订单状态</th>
-            <th>订单编号</th>
-            <th>商品名称</th>
-            <th>商品价格</th>
-            <th>订单总价</th>
-            <th>创建时间</th>
-        </tr>
+<ol class="breadcrumb">
+    <li>当前位置:待发货订单</li>
+</ol>
+<div class="container">
+    <div id="scrollContent" style="width: 99%">
+        <table class="table table-hover table-striped table-bordered">
+            <thead>
+            <tr class="info">
+                <th class="text-center">
+                    <span>订单状态</span>
+                </th>
+                <th class="text-center">
+                    <span>订单编号</span>
+                </th>
+                <th class="text-center">
+                    <span>商品名称</span>
+                </th>
+                <th class="text-center">
+                    <span>商品价格</span>
+                </th>
+                <th class="text-center">
+                    <span>订单总价</span>
+                </th>
+                <th class="text-center">
+                    <span>创建时间</span>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
         <c:choose>
             <c:when test="${ empty requestScope.mapList}">
                 <tr>
@@ -44,8 +66,12 @@
                 </c:forEach>
             </c:otherwise>
         </c:choose>
-
+            </tbody>
+        </table>
+    </div>
+</div>
     </table>
+<div>
     共查询到:<span style="color: #1f33ff">${fn:length(requestScope.mapList)}</span>条记录
 </div>
 </body>

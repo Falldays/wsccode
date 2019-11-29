@@ -1,6 +1,7 @@
 package com.qst.ssm.controller;
 
 import com.qst.ssm.entity.Order;
+import com.qst.ssm.entity.User;
 import com.qst.ssm.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,14 +30,20 @@ public class OrderController {
 
     //根据用户ID查询订单
     @RequestMapping(value = "queryOrder",method = {RequestMethod.GET,RequestMethod.POST})
-    public String queryOrder(@RequestParam("userId") int userId, Model model){
+    public String queryOrder(HttpSession session, Model model){
+        User user= new User();
+        user= (User) session.getAttribute("user");
+        int userId=user.getUserId();
         List<Map> mapList=orderService.queryOrder(userId);
         model.addAttribute("mapList",mapList);
         return "/order/query-order.jsp";
     }
     //根据用户ID以及订单状态查询所有订单
     @RequestMapping(value = "info", method = {RequestMethod.GET,RequestMethod.POST})
-    public String info(@RequestParam("userId") int userId, @RequestParam("orderStatus") int orderStatus, Model model){
+    public String info(HttpSession session,@RequestParam("orderStatus") int orderStatus, Model model){
+        User user= new User();
+        user= (User) session.getAttribute("user");
+        int userId=user.getUserId();
         List<Map>  mapList=orderService.info(userId,orderStatus);
         model.addAttribute("mapList",mapList);
         if(0==orderStatus){
@@ -47,7 +56,7 @@ public class OrderController {
 
     //删除订单
     @RequestMapping("deleteOrder")
-    public String deleteOrder(@RequestParam("orderId") int orderId){
+    public String deleteOrder(@RequestParam("order_id") int orderId){
         int row=orderService.deleteOrder(orderId);
         return "redirect:/order/delete-order-result.jsp?row="+row;
     }
@@ -58,19 +67,33 @@ public class OrderController {
      * @param orderId
      * @return
      */
-    @RequestMapping(value = "load_one", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "load_order", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public Order loadOrderData(@RequestParam("orderId") int orderId) {
-        Integer.parseInt(String.valueOf(orderId));
+    public Map<String,Object> loadOrderData(@RequestParam("order_id") int orderId) {
         Order order=orderService.getOrder(orderId);
-        System.out.println("#########"+orderId+"##########");
-        return order;
+        Map<String,Object> dataMap=new HashMap<>();
+        dataMap.put("order",order);
+        return dataMap;
     }
     //修改订单
     @RequestMapping("updateOrder")
     public String updateOrder(Order order){
         int row=orderService.updateOrder(order);
-       // System.out.println("#########"+order+"##########");
         return "redirect:/order/update-order-result.jsp？row="+row;
     }
+    //查询所有订单
+    @RequestMapping("cxOrder")
+    public String cxOrder(Model model){
+        List<Order> orderList=orderService.cxOrder();
+        model.addAttribute("orderList",orderList);
+        return "/order/cx-order.jsp";
+    }
+    //查询所有订单
+    @RequestMapping("quOrder")
+    public String quOrder(Model model){
+        List<Order> orderList=orderService.cxOrder();
+        model.addAttribute("orderList",orderList);
+        return "/order/query+update-order.jsp";
+    }
+
 }

@@ -17,4 +17,6 @@ public interface IOrderService {
     int updateOrder(Order order);
     //根据订单ID查询订单信息
     Order getOrder(int orderId);
+    //查询所有订单
+    List<Order> cxOrder();
 }

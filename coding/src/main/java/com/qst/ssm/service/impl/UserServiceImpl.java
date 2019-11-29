@@ -72,4 +72,13 @@ public class UserServiceImpl implements IUserService {
     public int logout(int userId) {
         return userDao.logout(userId);
     }
+    /**
+     * 查询所有用户
+     *
+     * @return
+     */
+    @Override
+    public List<User> cxUser() {
+        return userDao.cxUser();
+    }
 }

@@ -129,8 +129,8 @@ public class AdminController {
             return href = "/adminLogin.jsp";
         }else {
             //登录成功
-            session.setAttribute("admin",admin);
-            return href = "/left.jsp";
+            session.setAttribute("admin",admin1);
+            return href = "redirect:/main.jsp";
         }
         model.addAttribute("msg","用户名或密码错误，请重新登录！");
         return  href="/adminLogin.jsp";

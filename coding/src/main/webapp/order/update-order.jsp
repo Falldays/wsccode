@@ -14,14 +14,14 @@
         $(function () {
             //利用jQuery AJAX加载数据
             $.ajax({
-                url: '/order/load_one',//请求URL
-                data: {order_id: '${param.orderId}'},//请求参数
+                url: '/order/load_order',//请求URL
+                data: {order_id: '${param.order_id}'},//请求参数
                 type: 'POST',//请求方式
                 dataType: 'json', //将从服务器获取的数据处理成JSON格式
                 success: function (data) {
-                    //请求成功,data表示从服务获取的数据
+                    //请求成功,data表示从服务器获取的数据
                     console.info(data)
-                    //获取员工数据
+                    //获取订单数据
                     var order=data.order;
                     if($.isEmptyObject(order)){
                         alert("该订单不存在或已被删除");
@@ -30,7 +30,6 @@
                     }
                     //设置订单数据
                     $('input[name="orderNo"]').val(order.orderNo);
-                    $('input[name="userId"]').val(order.userId);
                     $('input[name="orderPrice"]').val(order.orderPrice);
                     $('input[name="expressNo"]').val(order.expressNo);
                     $('input[name="orderStatus"]').val(order.orderStatus);
@@ -53,7 +52,7 @@
         <li>订单状态:<input type="number" name="orderStatus" required></li>
         <!-- 在页面隐藏用户ID-->
             <input type="hidden" name="userId" value="${param.userId}">
-            <input type="hidden" name="orderId" value="${param.orderId}">
+            <input type="hidden" name="orderId" value="${param.order_id}">
             <input type="submit" value="修改订单">&nbsp;&nbsp;
             <input type="reset" value="重新填写">
         </li>
