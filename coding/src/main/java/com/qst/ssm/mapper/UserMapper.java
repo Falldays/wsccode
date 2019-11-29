@@ -11,7 +11,7 @@ public interface UserMapper {
      *
      * @return
      */
-   User queryUser(String username);
+   List<User> queryUser();
 
     /**
      * 根据用户ID加载用户信息

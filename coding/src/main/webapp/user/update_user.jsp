@@ -31,11 +31,11 @@
                     //设置员工数据
                     $('input[name="userName"]').val(user.userName);
                     $('input[name="userNc"]').val(user.userNc);
+                    //选中性别单选框
+                    $(':radio[name="sex"][value="'+user.sex+'"]').attr('checked',true);
                     $('input[name="sex"]').val(user.sex);
                     $('input[name="tel"]').val(user.tel);
                     $('input[name="birthday"]').val(user.birthday);
-                    //选中性别单选框
-                    $(':radio[name="sex"][value="'+user.sex+'"]').attr('checked',true);
                 },
 
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -56,7 +56,7 @@
             <label><input type="radio" name="sex" value="1"  ${1==user.sex?"cheked":""}    required>男</label>
             <label><input type="radio" name="sex" value="2" required>女</label>
         </li>
-        <li>手机号码:<input type="tel" name="tel" required></li>
+        <li>手机号码:<input type="text" name="tel" required></li>
         <li>出生日期:<input type="date" name="birthday" required></li>
             <!-- 在页面隐藏员工ID-->
             <input type="hidden" name="userId" value="${param.user_id}">

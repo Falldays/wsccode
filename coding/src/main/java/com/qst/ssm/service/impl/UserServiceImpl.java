@@ -19,8 +19,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @Transactional(propagation = Propagation.NEVER)
-    public User queryUser(String username) {
-        return userDao.queryUser(username);
+    public  List<User> queryUser() {
+        return userDao.queryUser();
     }
 
     @Override
@@ -44,7 +44,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public int updateUser(User user) {
-        return 0;
+        return userDao.updateUser(user);
     }
 
     @Override

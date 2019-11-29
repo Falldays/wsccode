@@ -22,9 +22,9 @@
     <select id="queryUser" resultType="user">
         <![CDATA[
         select
-            user_id as userid,
-            user_name as username,
-            user_nc as usernc,
+            user_id as userId,
+            user_name as userName,
+            user_nc as userNc,
             user_tel as tel,
             user_sex as sex,
             user_date as birthday,
@@ -34,6 +34,7 @@
         where user_name=#{username}
         ]]>
     </select>
+
     <!-- 根据用户ID加载用户信息-->
     <select id="getUser"  resultType="user" parameterType="int">
         <![CDATA[
@@ -46,7 +47,7 @@
             user_date as birthday
         from
             j_user
-        where user_id=#{user_id}
+        where user_id=#{userId}
        ]]>
     </select>
 
@@ -72,17 +73,20 @@
          )
       ]]>
     </insert>
+
     <!-- 根据用户ID删除用户记录-->
     <delete id="deleteUser" parameterType="int">
         <![CDATA[
-        delete from j_user where user_id=#{user_id}
+        delete from j_user where user_id=#{userId}
       ]]>
     </delete>
+
     <!-- 根据用户ID修改用户信息-->
     <update id="updateUser" parameterType="user">
     <![CDATA[
         update  j_user
-        set     user_name=#{userName},
+        set     user_id=#{userId},
+                user_name=#{userName},
                 user_nc=#{userNc},
                 user_sex=#{sex},
                 user_tel=#{tel},
@@ -120,7 +124,7 @@
                 user_date as birthday
             FROM
                 j_user
-            where user_id=#{user_id}
+            where user_id=#{userId}
         ]]>
     </select>
 </mapper>

@@ -46,16 +46,10 @@ public class UserController {
         return "/user/query+update-user.jsp";
     }
     @RequestMapping("query")
-    public String queryUser(HttpServletRequest request) {
-        String username=request.getParameter("username");
-        String password1= request.getParameter("password");
-        String pwd=DigestUtils.md5DigestAsHex(password1.getBytes());
-        User user= userService.queryUser(username);
-        String password= user.getPassword();
-        if(password.equals(pwd)){
-            return"/main.jsp";
-        }
-        return"/top.jsp";
+    public String queryUser(Model model) {
+        List<User> userList = userService.queryUser();
+        model.addAttribute("userList",userList);
+        return "/user/query_user.jsp";
     }
 
     /**
@@ -107,7 +101,7 @@ public class UserController {
     public Map<String, Object> loadUserData(@RequestParam("user_id") int userId,HttpServletRequest request) {
         User user = userService.getUser(userId);
         String username=request.getParameter("username");
-        User users = userService.queryUser(username);
+//        User users = userService.queryUser(username);
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("user", user);
         return dataMap;
