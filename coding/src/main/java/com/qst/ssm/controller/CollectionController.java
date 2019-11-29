@@ -3,6 +3,7 @@ package com.qst.ssm.controller;
 import com.qst.ssm.entity.Collect;
 import com.qst.ssm.entity.Product;
 import com.qst.ssm.entity.Shop;
+import com.qst.ssm.entity.User;
 import com.qst.ssm.service.ICollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -23,12 +25,15 @@ public class CollectionController {
     private ICollectionService collService;
     /**
      * 购物车查询商品
-     * @param userId
+     * @param
      * @param model
      * @return
      */
     @RequestMapping("querypro")
-    public String collPro(@RequestParam("user_id") int userId, Model model) {
+    public String collPro(HttpSession session, Model model) {
+        User user= new User();
+        user= (User) session.getAttribute("user");
+        int userId=user.getUserId();
         List<Map> mapList = collService.collPro(userId);
         model.addAttribute("mapList", mapList);
 //        跳转
@@ -50,11 +55,13 @@ public class CollectionController {
     }
 
     @RequestMapping("delete")
-    public String deletePro(@RequestParam("coll_id") int collId){
+    public String deletePro(HttpSession session,@RequestParam("coll_id") int collId){
         /*影响行数*/
         int rows=collService.delPro(collId);
-
-        return "redirect:/collect/querypro?user_id=1";
+        User user= new User();
+        user= (User) session.getAttribute("user");
+        int userId=user.getUserId();
+        return "redirect:/collect/querypro?user_id="+userId;
     }
 
     /**

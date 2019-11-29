@@ -1,6 +1,8 @@
 package com.qst.ssm.dao.impl;
 
 import com.qst.ssm.dao.IShopDao;
+import com.qst.ssm.entity.Order;
+import com.qst.ssm.entity.Orderxx;
 import com.qst.ssm.entity.Shop;
 import com.qst.ssm.mapper.ShopMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,10 @@ public class ShopDaoImpl implements IShopDao {
     @Qualifier("shopMapper")
     private ShopMapper shopMapper;
 
-    @Override
-    public List<Map> queryShop() {
-        return shopMapper.queryShop();
-    }
+//    @Override
+//    public List<Map> queryShop() {
+//        return shopMapper.queryShop();
+//    }
 
     @Override
     public int updateShop(Shop shop) {
@@ -28,7 +30,24 @@ public class ShopDaoImpl implements IShopDao {
     }
 
     @Override
-    public int deleteShop(int scId) {
-        return shopMapper.deleteShop(scId);
+    public int deleteShop(int userId) {
+        return shopMapper.deleteShop(userId);
+    }
+
+
+    /*    */
+    @Override
+    public List<Map> queryCart(int useId) {
+        return shopMapper.queryCart(useId);
+    }
+
+    @Override
+    public int addOrder(Order order) {
+        return shopMapper.addOrder(order);
+    }
+
+    @Override
+    public int addOrderxx(Orderxx orderxx) {
+        return shopMapper.addOrderxx(orderxx);
     }
 }

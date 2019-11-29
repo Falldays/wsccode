@@ -58,7 +58,7 @@
                         <td>${collect.pdPrice}元</td>
                         <td>
                             <a href="#" onclick="deletePro(${collect.collId},'${collect.pdName}')">取消收藏</a>&nbsp;&nbsp;
-                            <a href="/collect/getpro?pd_id=${collect.pdId}" target="_blank">详情</a>
+                            <a href="/collect/getpro?pd_id=${collect.pdId}">详情</a>
                         </td>
                     </tr>
                 </c:forEach>

@@ -1,5 +1,7 @@
 package com.qst.ssm.mapper;
 
+import com.qst.ssm.entity.Order;
+import com.qst.ssm.entity.Orderxx;
 import com.qst.ssm.entity.Shop;
 
 import java.util.List;
@@ -21,8 +23,31 @@ public interface ShopMapper {
 
     /**
      *根据购物车ID删除商品
-     * @param scId
+     * @param
      * @return
      */
-    int deleteShop(int scId);
+    int deleteShop(int useId);
+
+    /**
+     * 根据用户ID查询购物车信息
+     * @param useId
+     * @return
+     */
+    List<Map> queryCart(int useId);
+
+    /**
+     * 将购物车信息插入订单表中,并返回orderId
+     * @param order
+     * @return
+     */
+    int  addOrder(Order order);
+
+    /**
+     * 向订单插入信息
+     * @param orderxx
+     * @return
+     */
+    int addOrderxx(Orderxx orderxx);
+
+
 }

@@ -45,11 +45,9 @@
             </li>
             <li><a href="#">免费注册</a></li>
             <li><a href="/my-order.jsp">我的订单</a></li>
-            <li><a href="/collect/querypro?user_id=1">我的收藏夹</a></li>
-            <li><a href="#">我的购物车</a></li>
+            <li><a href="/collect/querypro">我的收藏夹</a></li>
+            <li><a href="/shop/queryshop">我的购物车</a></li>
             <li><a href="#">联系客服</a></li>
-            <li><a href="/emp/add_emp.jsp">添加员工</a></li>
-            <li><a href="/emp/query">查询员工</a></li>
             <li><a href="#" style="border: none">网站导航</a></li>
         </ul>
     </div>
