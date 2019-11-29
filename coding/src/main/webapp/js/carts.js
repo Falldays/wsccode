@@ -1,5 +1,5 @@
 /**
-
+ * Created by Administrator on 2017/5/24.
  */
 
 $(function () {
@@ -222,7 +222,7 @@ $(function () {
                 total_count += num;
             }
         });
-        $('.total_text').html('￥'+total_money);
+        $('.total_text').html('&yen;'+total_money);
         $('.piece_num').html(total_count);
 
         // console.log(total_money,total_count);

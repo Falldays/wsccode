@@ -1,6 +1,5 @@
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -21,12 +20,11 @@
                 window.location.href="/shop/jiesuan";
             }
         }
-    </script>>
+    </script>
 </head>
 <body>
 <section class="cartMain">
-
-    <from action="/shop/jiesuan" method="post" id="myFrom">
+    <from action="/shop/jiesuan" method="post">
     <div class="cartMain_hd">
 		<ul class="order_lists cartTop">
 			<li class="list_chk">
@@ -51,7 +49,7 @@
             <c:choose>
             <c:when test="${ empty requestScope.cartlist}">
                 <tr>
-                    <td colspan="7" align="center"><span style="color: #0000FF">~还没有收藏商品~</span></td>
+                    <td colspan="7" align="center"><span style="color: #0000FF">购物车没有东西</span></td>
                 </tr>
             </c:when>
             <c:otherwise>
@@ -72,26 +70,26 @@
 				</li>
                 <%--商品价格--%>
 				<li class="list_price">
-					<p class="price">￥${carts.pdPrice}</p>
+					<p class="price">&yen;${carts.pdPrice}</p>
 				</li>
                 <%--计算总价--%>
 				<li class="list_amount">
 					<div class="amount_box">
 						<a href="javascript:;" class="reduce reSty">-</a>
-						<input type="text" value="${carts.scNumber}" class="sum" name="scNumber${carts.no}" >
+						<input type="text" value="1" class="sum" >
 						<a href="javascript:;" class="plus">+</a>
 					</div>
 				</li>
 				<li class="list_sum">
-					<p class="sum_price">￥${carts.pdPrice}</p>
+					<p class="sum_price">&yen;${carts.pdPrice}</p>
 				</li>
                  <%--操作--%>
 				<li class="list_op">
 					<p class="del"><a href="#" class="delBtn">移除商品</a></p>
-                    <input type="hidden" name="scId${carts.no}" value="${carts.scId}">
-                    <input type="hidden" name="pdId" value="${carts.pdId}">
-                    <input type="hidden" name="collId${carts.no}" value="${collId}">
-                    <input type="hidden" name="pdId${carts.no}" value="${carts.pdId}" >
+                    <%--<input type="hidden" name="scId${carts.no}" value="${carts.scId}">--%>
+                    <%--<input type="hidden" name="pdId" value="${carts.pdId}">--%>
+                    <%--<input type="hidden" name="collId${carts.no}" value="${collId}">--%>
+                    <%--<input type="hidden" name="pdId${carts.no}" value="${carts.pdId}" >--%>
 
 				</li>
 
@@ -102,16 +100,15 @@
 		</div>
 	</div>
 
-	
+
 	<!--底部-->
 
 	<div class="bar-wrapper">
 		<div class="bar-right">
 
             <div class="piece">已选商品<strong class="piece_num">0</strong>件</div>
-			<div class="totalMoney" >共计: <strong class="total_text">0.00</strong><input type="hidden" class="total_text" name="scPrice" value=""></div>
-            <div class="calBtn"><a href="#" onclick="document.getElementById('myForm').submit()">结算</a></div>
-
+			<div class="totalMoney" >共计: <strong class="total_text">0.00</strong></div>
+            <div class="calBtn"><a href="/shop/jiesuan" >结算</a></div>
 		</div>
 	</div>
 </from>

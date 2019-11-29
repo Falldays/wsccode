@@ -68,13 +68,13 @@ public class ShopController {
         }
         session.setAttribute("size",cartlist.size());
         model.addAttribute("cartlist",cartlist);
-        return "/shop/shop_query.jsp";
+        return "/shop/gwc.jsp";
     };
 
     private Order order;
     private Orderxx orderxx;
     @RequestMapping("jiesuan")
-    public String jiesuanCart(@RequestParam Map map, HttpSession session){
+    public String jiesuanCart(/*@RequestParam Map map,*/ HttpSession session){
        /* int size= (int) session.getAttribute("size");
         Integer sc=0,s=0,p=0;
         Integer scprice=0;
