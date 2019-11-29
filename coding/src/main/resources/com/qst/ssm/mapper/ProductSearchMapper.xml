@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qst.ssm.mapper.ProductSearchMapper">
+    <!-- 查询所有商品-->
+    <select id="queryProductByRange" resultType="product" parameterType="Map">
+        <![CDATA[
+        SELECT
+            pd_id AS pdId,
+            pd_three_id AS pdthreeId,
+            pd_no AS pdNo,
+            pd_name AS pdName,
+            pd_price AS pdPrice,
+            pd_cover AS pdCover,
+            pd_date AS pdDate
+        FROM
+            product
+            LIMIT #{subscript},#{number};
+        ]]>
+    </select>
+
+    <!-- 根据商品名称模糊查询商品-->
+    <select id="queryProductByName" resultType="product" parameterType="String">
+        <![CDATA[
+        SELECT
+            pd_id AS pdId,
+            pd_three_id AS pdthreeId,
+            pd_no AS pdNo,
+            pd_name AS pdName,
+            pd_price AS pdPrice,
+            pd_cover AS pdCover,
+            pd_date AS pdDate
+        FROM
+            product
+        ]]>
+        where pd_name LIKE concat(concat("%",#{pdName}),"%")  ;
+    </select>
+
+    <!--根据一级id或二级id查询商品-->
+    <select id="queryProductByOneOrTwo" resultType="product" parameterType="Map">
+        SELECT
+            pd_id AS pdId,
+            pd_three_id AS pdthreeId,
+            pd_no AS pdNo,
+            pd_name AS pdName,
+            pd_price AS pdPrice,
+            pd_cover AS pdCover,
+            pd_date AS pdDate
+        FROM
+            product
+        WHERE
+            pd_three_id IN ( SELECT pd_three_id FROM j_three_classification WHERE 1=1
+        <if test="oneId!=null or twoId!=null">
+           and pd_two_id IN
+            (
+        </if>
+        <if test="twoId==null">
+            SELECT pd_two_id FROM j_two_classification WHERE cla_fid = #{oneId}
+        </if>
+        <if test="twoId!=null">
+            #{twoId}
+        </if>
+        <if test="oneId!=null or twoId!=null">
+            ) );
+        </if>
+
+    </select>
+
+    <!--查询所有一级分类信息-->
+    <select id="queryOne" resultType="classification">
+        SELECT
+            cla_fid as claFid,
+            cla_no as claNo,
+            cla_name as claName
+        FROM
+            j_classification;
+    </select>
+
+    <!--查询所有二级分类信息-->
+    <select id="queryTwo" resultType="two">
+        SELECT
+            pd_two_id as pd_twoId,
+            pd_two_no as pd_twoNo,
+            pd_two_name as pd_twoName,
+            cla_fid as claFid
+        FROM
+            j_two_classification;
+    </select>
+
+</mapper>
