@@ -23,6 +23,6 @@
         <span style="color:rgb(219,99,48)">添加商品,服务器返回未知的状态</span>
     </c:otherwise>
 </c:choose>
-<a href="#">返回</a>
+<a href="/index.jsp">返回</a>
 </body>
 </html>

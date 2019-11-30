@@ -38,31 +38,19 @@
       <![CDATA[
         insert into j_shopping_cart (
             user_id,
-            pd_id,
-           sc_date
+            pd_id
         )
         values
         (
             #{userId},
-            #{pdId},
-            #{scDate}
+            #{pdId}
          )
       ]]>
     </insert>
     <!--加入收藏夹-->
-    <insert id="addCollect" parameterType="shop">
+    <insert id="addCollect" parameterType="collect">
       <![CDATA[
-        insert into j_shopping_cart (
-            user_id,
-            pd_id,
-           coll_date
-        )
-        values
-        (
-            #{userId},
-            #{pdId},
-            #{collDate}
-         )
+        INSERT INTO j_collect(user_id,pd_id) VALUES(#{userId},#{pdId});
       ]]>
     </insert>
 </mapper>

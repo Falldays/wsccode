@@ -136,6 +136,7 @@
 </div>
 
 <div style="width: 1400px;margin-top: 50px;height: 400px">
+    <form action="/collect/addshopxx" method="post">
     <div style="width: 350px;float: left;">
         <img src="${product.pdCover}" style="height: 300px;margin-left: 300px">
     </div>
@@ -144,9 +145,11 @@
         <p>价格：<span style="font-size: 20px;color: red;">￥${product.pdPrice}</span></p>
         <p>数量：1</p>
         <p>库存：${product.pdNumber}件</p>
-        <input type="button" class="btn btn-danger" value="加入购物车">
-        <a href="/collect/addshop?pdId=${product.pdId}"><input type="button" class="btn btn-warning" value="加入收藏夹"></a>
+        <input type="hidden" value="${product.pdId}" name="pdId">
+        <input type="submit" class="btn btn-danger" value="加入购物车">
+        <a href="/collect/addcollect?pdId=${product.pdId}"><input type="button" class="btn btn-warning" value="加入收藏夹"></a>
     </div>
+    </form>
 </div>
 
 <div class="container">

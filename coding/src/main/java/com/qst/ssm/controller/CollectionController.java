@@ -72,7 +72,7 @@ public class CollectionController {
     }
 
     /**
-     * 加入购物车
+     * 收藏夹加入购物车
      * @param shop
      * @return
      */
@@ -83,8 +83,6 @@ public class CollectionController {
         int userId=user.getUserId();
         shop.setUserId(userId);
         shop.setPdId(pdId);
-        Date date=new Date();
-        shop.setScDate(date);
         shop.setPdId(pdId);
         int rows=collService.addShop(shop);//加入购物车
         collService.delPro(collId);//删除收藏夹信息
@@ -93,6 +91,24 @@ public class CollectionController {
     }
 
     /**
+     * 商品加入购物车
+     * @param session
+     * @param shop
+     * @param pdId
+     * @return
+     */
+    @RequestMapping("addshopxx")
+    public String addShop(HttpSession session,Shop shop,String pdId){
+        User user= new User();
+        user= (User) session.getAttribute("user");
+        int userId=user.getUserId();
+        shop.setUserId(userId);
+        shop.setPdId(pdId);
+        int rows=collService.addShop(shop);//加入购物车
+        return "/coll/add_shop.jsp?rows=" + rows;
+
+    }
+    /**
      * 加入收藏夹
      * @param session
      * @param collect
@@ -100,14 +116,12 @@ public class CollectionController {
      * @return
      */
     @RequestMapping("addcollect")
-    public String addcollect(HttpSession session,Collect collect,Integer pdId){
+    public String addcollect(HttpSession session,Collect collect,@RequestParam("pdId")Integer pdId){
         User user= new User();
         user= (User) session.getAttribute("user");
-        int userId=user.getUserId();
+        Integer userId=user.getUserId();
         collect.setUserId(userId);
-        collect.setPdId(pdId);
-        Date date=new Date();
-        collect.setCollDate(date);
+//        Integer pdid=Integer.parseInt(pdId) ;
         collect.setPdId(pdId);
         int rows=collService.addCollect(collect);//加入收藏夹
         return "/coll/add_collect.jsp?rows=" + rows;

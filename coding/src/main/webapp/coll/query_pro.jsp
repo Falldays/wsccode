@@ -96,8 +96,8 @@
                             <a href="#" onclick="deletePro(${collect.collId},'${collect.pdName}')">取消收藏</a>&nbsp;&nbsp;
                             <input type="hidden" value="${collect.pdId}" name="pdId">
                             <input type="hidden" value="${collect.collId}" name="collId">
-                            <input type="submit" value="加入购物车">
                             <a href="/collect/getpro?pd_id=${collect.pdId}">详情</a>
+                            <input type="submit" value="加入购物车">
                         </td>
                     </tr>
                 </c:forEach>
