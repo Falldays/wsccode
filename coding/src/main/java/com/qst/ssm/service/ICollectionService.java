@@ -53,4 +53,10 @@ public interface ICollectionService {
      * @return
      */
     int insertPro(int collId);
+    /**
+     * 加入收藏夹
+     * @param collect
+     * @return
+     */
+    int addCollect(Collect collect);
 }

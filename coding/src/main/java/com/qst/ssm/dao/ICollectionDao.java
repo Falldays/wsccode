@@ -57,4 +57,10 @@ public interface ICollectionDao {
      * @return
      */
     int addShop(Shop shop);
+    /**
+     * 加入收藏夹
+     * @param collect
+     * @return
+     */
+    int addCollect(Collect collect);
 }

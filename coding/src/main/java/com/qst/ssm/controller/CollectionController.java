@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public class CollectionController {
     @Qualifier("collService")
     private ICollectionService collService;
     /**
-     * 购物车查询商品
+     * 收藏夹查询商品
      * @param
      * @param model
      * @return
@@ -41,7 +42,7 @@ public class CollectionController {
     }
 
     /**
-     * 购物车查看商品信息
+     * 收藏夹查看商品详细信息
      * @param pdId
      * @param model
      * @return
@@ -54,6 +55,12 @@ public class CollectionController {
         return "/coll/pro_info.jsp";
     }
 
+    /**
+     * 根据收藏ID删除收藏信息
+     * @param session
+     * @param collId
+     * @return
+     */
     @RequestMapping("delete")
     public String deletePro(HttpSession session,@RequestParam("coll_id") int collId){
         /*影响行数*/
@@ -61,7 +68,7 @@ public class CollectionController {
         User user= new User();
         user= (User) session.getAttribute("user");
         int userId=user.getUserId();
-        return "redirect:/collect/querypro?user_id="+userId;
+        return "redirect:/collect/querypro";
     }
 
     /**
@@ -70,10 +77,40 @@ public class CollectionController {
      * @return
      */
     @RequestMapping("addshop")
-    public String addShop(Shop shop){
-        int rows=collService.addShop(shop);
+    public String addShop(HttpSession session,Shop shop,String pdId,Integer collId){
+        User user= new User();
+        user= (User) session.getAttribute("user");
+        int userId=user.getUserId();
+        shop.setUserId(userId);
+        shop.setPdId(pdId);
+        Date date=new Date();
+        shop.setScDate(date);
+        shop.setPdId(pdId);
+        int rows=collService.addShop(shop);//加入购物车
+        collService.delPro(collId);//删除收藏夹信息
         return "/coll/add_shop.jsp?rows=" + rows;
 
     }
 
+    /**
+     * 加入收藏夹
+     * @param session
+     * @param collect
+     * @param pdId
+     * @return
+     */
+    @RequestMapping("addcollect")
+    public String addcollect(HttpSession session,Collect collect,Integer pdId){
+        User user= new User();
+        user= (User) session.getAttribute("user");
+        int userId=user.getUserId();
+        collect.setUserId(userId);
+        collect.setPdId(pdId);
+        Date date=new Date();
+        collect.setCollDate(date);
+        collect.setPdId(pdId);
+        int rows=collService.addCollect(collect);//加入收藏夹
+        return "/coll/add_collect.jsp?rows=" + rows;
+
+    }
 }

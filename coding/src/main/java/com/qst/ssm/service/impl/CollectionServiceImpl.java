@@ -62,4 +62,9 @@ public class CollectionServiceImpl implements ICollectionService {
     public int insertPro(int collId) {
         return 0;
     }
+
+    @Override
+    public int addCollect(Collect collect) {
+        return collDao.addCollect(collect);
+    }
 }
