@@ -29,28 +29,6 @@ public class ShopController {
 
 
     /**
-     * 修改购物车数量和
-     * @param shop
-     * @return
-     */
-    @RequestMapping("")
-    public String updateShop(Shop shop){
-        int rows=shopService.updateShop(shop);
-        return null;
-    };
-
-    /**
-     *根据购物车ID删除商品
-     * @param scId
-     * @return
-     */
-    @RequestMapping("deleteshopsp")
-    public String deleteShop(@Param("scId") int scId){
-        int rows=shopService.deleteShop(scId);
-        return null;
-    };
-
-    /**
      * 查询购物车
      * @param
      *
@@ -101,5 +79,32 @@ public class ShopController {
         int userId=user.getUserId();
         shopService.deleteShop(userId);//清除购物车选择的商品
         return "/shop/jiesuan_result.jsp";
+    };
+
+
+
+
+    /*未用*/
+
+    /**
+     * 修改购物车数量和
+     * @param shop
+     * @return
+     */
+    @RequestMapping("")
+    public String updateShop(Shop shop){
+        int rows=shopService.updateShop(shop);
+        return null;
+    };
+
+    /**
+     *根据购物车ID删除商品
+     * @param scId
+     * @return
+     */
+    @RequestMapping("deleteshopsp")
+    public String deleteShop(@Param("scId") int scId){
+        int rows=shopService.deleteShop(scId);
+        return null;
     };
 }

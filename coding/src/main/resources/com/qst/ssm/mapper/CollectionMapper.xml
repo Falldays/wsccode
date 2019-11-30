@@ -39,15 +39,29 @@
         insert into j_shopping_cart (
             user_id,
             pd_id,
-            sc.number,
-            sc.price
+           sc_date
         )
         values
         (
             #{userId},
             #{pdId},
-            #{scNumber},
-            #{scPrice}
+            #{scDate}
+         )
+      ]]>
+    </insert>
+    <!--加入收藏夹-->
+    <insert id="addCollect" parameterType="shop">
+      <![CDATA[
+        insert into j_shopping_cart (
+            user_id,
+            pd_id,
+           coll_date
+        )
+        values
+        (
+            #{userId},
+            #{pdId},
+            #{collDate}
          )
       ]]>
     </insert>

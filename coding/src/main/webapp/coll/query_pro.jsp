@@ -63,7 +63,6 @@
             </li>
             <li><a href="#">免费注册</a></li>
             <li><a href="/my-order.jsp">我的订单</a></li>
-            <li><a href="/collect/querypro">我的收藏夹</a></li>
             <li><a href="/shop/queryshop">我的购物车</a></li>
             <li><a href="#">联系客服</a></li>
             <li><a href="#" style="border: none">网站导航</a></li>
@@ -74,6 +73,8 @@
 
 <div>
     <h2>收藏夹</h2>
+    <form action="/collect/addshop" method="post">
+
     <table width="600" border="1" cellspacing="0">
         <tr>
             <th>商品名</th>
@@ -93,6 +94,9 @@
                         <td>${collect.pdPrice}元</td>
                         <td>
                             <a href="#" onclick="deletePro(${collect.collId},'${collect.pdName}')">取消收藏</a>&nbsp;&nbsp;
+                            <input type="hidden" value="${collect.pdId}" name="pdId">
+                            <input type="hidden" value="${collect.collId}" name="collId">
+                            <input type="submit" value="加入购物车">
                             <a href="/collect/getpro?pd_id=${collect.pdId}">详情</a>
                         </td>
                     </tr>
@@ -113,7 +117,7 @@
 
         </script>
     </table>
-
+    </form>
 </div>
 </body>
 </html>

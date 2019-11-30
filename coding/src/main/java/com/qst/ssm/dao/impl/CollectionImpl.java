@@ -44,6 +44,12 @@ public class CollectionImpl implements ICollectionDao {
     public int addShop(Shop shop) {
         return collectionMapper.addShop(shop);
     }
+
+    @Override
+    public int addCollect(Collect collect) {
+        return  collectionMapper.addCollect(collect);
+    }
+
     @Override
     public int getCollnum(int pdId) {
         return 0;

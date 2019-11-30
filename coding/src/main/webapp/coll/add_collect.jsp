@@ -1,15 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: FanLiMing
-  Date: 2019/11/21
-  Time: 19:46
+  Date: 2019/11/30
+  Time: 20:57
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>添加结果</title>
+    <title>加入购物车</title>
 </head>
 <body>
 <c:choose>
@@ -23,6 +23,6 @@
         <span style="color:rgb(219,99,48)">添加商品,服务器返回未知的状态</span>
     </c:otherwise>
 </c:choose>
-<a href="/collect/querypro">返回</a>
+<a href="#">返回</a>
 </body>
 </html>
