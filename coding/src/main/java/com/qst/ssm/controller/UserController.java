@@ -141,7 +141,7 @@ public class UserController {
         }//else {
             //登录成功
             session.setAttribute("user",user1);
-             return   "redirect:/index.jsp";
+             return   "redirect:/userIndex.jsp";
        /* }
         model.addAttribute("msg","用户名或密码错误，请重新登录！");
         System.out.println("用户名或密码错误，请重新登录");
@@ -158,7 +158,7 @@ public class UserController {
     public String logout(HttpSession session)throws Exception{
         session.removeAttribute("userId");
         session.invalidate();
-        return "redirect:/userLogin.jsp";
+        return "redirect:/userIndex.jsp";
     }
 
 }

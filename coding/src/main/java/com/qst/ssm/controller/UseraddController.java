@@ -28,20 +28,24 @@ public class UseraddController {
      * @return
      */
     @RequestMapping("getUseradd")
-    public String getUseradd(@RequestParam("user_id") int userId, Model model) {
+    public String getUseradd( Model model,HttpSession session) {
+        User user   =(User) session.getAttribute("user");
+        Integer userId = user.getUserId();
         List<Useradd> useradd = useraddService.getUseradd(userId);
         model.addAttribute("useradds", useradd);
         return "/user_address.jsp";
     }
 
     @RequestMapping("insertUseradd")
-    public String addUseradd(@RequestParam("user_id") int userId,String addAddress1,String addAddress2, String addAddress3,String addAddress4,Useradd useradd) {
+    public String addUseradd(String addAddress1,String addAddress2, String addAddress3,String addAddress4,Useradd useradd,HttpSession session) {
+        User user   =(User) session.getAttribute("user");
+        Integer userId = user.getUserId();
         String addAddress=addAddress1+addAddress2+addAddress3+addAddress4;
         System.out.println(addAddress);
         useradd.setAddAddress(addAddress);
         useradd.setUserId(userId);
         int rows = useraddService.insertUseradd(useradd);
-        return "/index.jsp";
+        return "redirect:/useradd/getUseradd";
     }
 
     /**
@@ -56,7 +60,7 @@ public class UseraddController {
         useradd.setUseraddId(useraddId);
         int rows = useraddService.delUseradd(useraddId);
         //重定向到删除结果的页面
-        return "/index.jsp" ;
+        return "redirect:/useradd/getUseradd" ;
     }
 
 
@@ -71,9 +75,12 @@ public class UseraddController {
 
 
     @RequestMapping("updUseradd")
-    public String updUseradd(Useradd useradd){
+    public String updUseradd(Useradd useradd,String addAddress1,String addAddress2, String addAddress3,String addAddress4){
+        String addAddress=addAddress1+addAddress2+addAddress3+addAddress4;
+        System.out.println(addAddress);
+        useradd.setAddAddress(addAddress);
         int rows =useraddService.updUseradd(useradd);
-        return "/index.jsp" ;
+        return "redirect:/useradd/getUseradd" ;
     }
 
 }

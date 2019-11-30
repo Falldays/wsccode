@@ -102,13 +102,27 @@
 <div class="top" id="item4">
     <div class="container clearfix">
         <ul class="clearfix fr">
-            <li><a href="userLogin.jsp">您好，请登录</a></li>
-            <li><a href="#">免费注册</a></li>
-            <li><a href="#">我的订单</a></li>
-            <li><a href="#">我的收藏夹</a></li>
-            <li><a href="#">我的购物车</a></li>
-            <li><a href="#">联系客服</a></li>
-            <li><a href="#" style="border: none">网站导航</a></li>
+            <c:choose>
+                <c:when test="${empty sessionScope.user}">
+                    <li><a href="/user/userLogin.jsp">您好，请登录</a></li>
+                    <li><a href="/user/add_user.jsp">免费注册</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="/user/info.jsp">您好，${sessionScope.user.userName}</a></li>
+                </c:otherwise>
+            </c:choose>
+            <li><a href="/my-order.jsp">我的订单</a></li>
+            <li><a href="/collect/querypro">我的收藏夹</a></li>
+            <li><a href="/shop/queryshop">我的购物车</a></li>
+            <c:choose>
+                <c:when test="${empty sessionScope.user}">
+                    <li><a href="/useradd/getUseradd" style="border: none">我的地址</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="/useradd/getUseradd">我的地址</a></li>
+                    <li><a href="/user/logout" style="border: none">退出登录</a></li>
+                </c:otherwise>
+            </c:choose>
         </ul>
     </div>
 </div>
@@ -123,10 +137,10 @@
                 <input type="text" placeholder="小伙伴，你想找什么?" name="pdName"/><input type="submit" value="搜 索"/>
             </form>
             <p>热门搜索：
-                <a href="productSearch/productSearchByOneOrTwo?oneId=14">男装</a>
-                <a href="productSearch/productSearchByOneOrTwo?twoId=1">潮流鞋子</a>
-                <a href="productSearch/productSearchByOneOrTwo?oneId=3">手机数码</a>
-                <a href="productSearch/productSearchByOneOrTwo?oneId=8">家具家具</a>
+                <a href="product_flsearch.jsp?oneId=14&name=男鞋">男装</a>
+                <a href="product_flsearch.jsp?twoId=1&name=潮流鞋子">潮流鞋子</a>
+                <a href="product_flsearch.jsp?oneId=3&name=手机数码">手机数码</a>
+                <a href="product_flsearch.jsp?oneId=8&name=家居家具">家居家具</a>
             </p>
         </div>
 
@@ -181,11 +195,10 @@
                 </a>
             </div>
         </div>
-
         <div class="col-md-3 column">
             <div class="mid">
                 <a href="#">
-                    <img alt="" src="images/cd.webp" style="height: 442px;"/>
+                    <img alt="" src="images/three.webp" style="height: 442px;"/>
                 </a>
             </div>
         </div>

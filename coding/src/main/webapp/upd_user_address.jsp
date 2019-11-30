@@ -1,5 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"
+            +request.getServerName()+":"
+            +request.getServerPort()+path+"/";
+%>
+<base href="<%=basePath%>">
 <html>
 <head>
     <meta charset="utf-8">
@@ -16,7 +23,7 @@
 <div class="top" id="item4">
     <div class="container clearfix">
         <ul class="clearfix fr">
-            <li><a href="#">首页</a></li>
+            <li><a href="/user/info.jsp">您好，${sessionScope.user.userName}</a></li>
             <li><a href="#">我的订单</a></li>
             <li><a href="/collect/querypro?user_id=1">我的收藏夹</a></li>
             <li><a href="#">我的购物车</a></li>
@@ -29,7 +36,7 @@
 <div class="header">
     <div class="container clearfix">
         <div class="logo fl">
-            <a href="userindex.jsp"><img src="images/logo4.png" alt=""/></a>
+            <a href="userIndex.jsp"><img src="images/logo4.png" alt=""/></a>
         </div>
     </div>
 </div>
@@ -42,11 +49,14 @@
                 <div class="panel-group" id="panel-566826">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a class="panel-title" data-toggle="collapse" data-parent="#panel-566826" href="#panel-element-753713">账号管理</a>
+                            <a class="panel-title" data-toggle="collapse" data-parent="#panel-566826" >账号管理</a>
                         </div>
                         <div id="panel-element-753713" class="panel-collapse in">
                             <div class="panel-body">
-                                <a href="user_address.jsp">收货地址设置</a>
+                                <a href="/user/info.jsp">用户详细信息</a>
+                            </div>
+                            <div class="panel-body">
+                                <a href="/useradd/getUseradd">收货地址设置</a>
                             </div>
                         </div>
                     </div>

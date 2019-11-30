@@ -1,4 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"
+            +request.getServerName()+":"
+            +request.getServerPort()+path+"/";
+%>
+<base href="<%=basePath%>">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,14 +52,14 @@
 <div class="header">
 	<div class="logo">
 	
-	<img src="images/logo4.png" style="margin-top: 15px;margin-left: 50px;">
+	<a href="../userIndex.jsp"><img src="images/logo4.png" style="margin-top: 15px;margin-left: 50px;"></a>
 	<img src="images/cat.jpg" style="height: 106px;width: 106px;margin-right: 30px;"align="right">
 	</div>
 
 </div>
 	<div class="container" style="color:#FFF" >
 	<div class="row clearfix">
-		<div class="col-md-12 column" style="margin-top: 100px">
+		<div class="col-md-12 column" >
 			<h3 align="right" style="margin-right: 80px;">
 				账户登录
 			</h3>
@@ -86,7 +93,7 @@
 
 <div class="w">
     <div id="footer-2013">
-        <div class="links" align="center" style="margin-top: 250px;">
+        <div class="links" align="center" style="margin-top: 50px;">
             <a rel="nofollow" target="_blank" href="//www.jd.com/intro/about.aspx">
                 关于我们
             </a>
