@@ -32,13 +32,29 @@
 <body>
 <div class="top" id="item4">
     <div class="container clearfix">
+        <li><a href="userIndex.jsp" style="border: none">首页</a></li>
         <ul class="clearfix fr">
-            <li><a href="/user/info.jsp">您好，${sessionScope.user.userName}</a></li>
+            <c:choose>
+                <c:when test="${empty sessionScope.user}">
+                    <li><a href="/user/userLogin.jsp">您好，请登录</a></li>
+                    <li><a href="/user/add_user.jsp">免费注册</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="/user/info.jsp">您好，${sessionScope.user.userName}</a></li>
+                </c:otherwise>
+            </c:choose>
             <li><a href="/my-order.jsp">我的订单</a></li>
-            <li><a href="/collect/querypro">我的收藏夹</a></li>
+
             <li><a href="/shop/queryshop">我的购物车</a></li>
-            <li><a href="#">联系客服</a></li>
-            <li><a href="#" style="border: none">网站导航</a></li>
+            <c:choose>
+                <c:when test="${empty sessionScope.user}">
+                    <li><a href="/useradd/getUseradd" style="border: none">我的地址</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="/useradd/getUseradd">我的地址</a></li>
+                    <li><a href="/user/logout" style="border: none">退出登录</a></li>
+                </c:otherwise>
+            </c:choose>
         </ul>
     </div>
 </div>

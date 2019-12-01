@@ -13,7 +13,7 @@
 </head>
 <body>
 结算成功
-<a href="/index.jsp">返回主界面</a>
+<a href="/userIndex.jsp">返回主界面</a>
 <%--<c:choose>--%>
     <%--<c:when test="${1==param.rows}">--%>
         <%--<span style="color:rgb(0,0,255)">结算成功</span>--%>
