@@ -16,93 +16,91 @@
             +request.getServerName()+":"
             +request.getServerPort()+path+"/";
 %>
-
 <base href="<%=basePath%>">
-
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="author" content="order by dede58.com"/>
-    <link rel="stylesheet" href="css/public.css"/>
-    <link rel="stylesheet" href="css/index.css"/>
-    <link rel="stylesheet" href="css/swiper3.07.min.css"/>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery-1.11.2.min.js"></script>
-    <script src="js/myfocus-2.0.1.min.js"></script>
-    <script src="js/main.js"></script>
+    <meta charset="utf-8">
 
-    <style>
-        body{
-            background-color:#FCFCFC;
-        }
-        .swiper-container {
-            width: 1100px;
-            height: 300px;
-            margin: 0 auto;
-        }
-    </style>
-    <title>微商城 - 我的购物车</title>
+    <title>收货地址-微商城</title>
+
+    <script src="js/jsAddress.js"></script>
+    <link href="css/public.css" rel="stylesheet" type="text/css" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+
 </head>
 <body>
-
 <div class="top" id="item4">
     <div class="container clearfix">
         <ul class="clearfix fr">
-            <li><c:choose>
-                <c:when test="${empty sessionScope.user}">
-                    <span style="color: #FF0000"><a href="user/userLogin.jsp">您好，请登录</a></span>
-                </c:when>
-                <c:otherwise>
-                    <ul style="list-style: none">
-                        <li><b>${sessionScope.user.userName}</b></li>
-                    </ul>
-                </c:otherwise>
-            </c:choose>
-            </li>
-            <li><a href="#">免费注册</a></li>
-            <li><a href="/my-order.jsp">我的订单</a></li>
-            <li><a href="/shop/queryshop">我的购物车</a></li>
+            <li><a href="/user/info.jsp">您好，${sessionScope.user.userName}</a></li>
+            <li><a href="#">我的订单</a></li>
+            <li><a href="/collect/querypro?user_id=1">我的收藏夹</a></li>
+            <li><a href="#">我的购物车</a></li>
             <li><a href="#">联系客服</a></li>
             <li><a href="#" style="border: none">网站导航</a></li>
         </ul>
     </div>
 </div>
+<ol class="breadcrumb">
+    <li>当前位置:收藏夹</li>
+</ol>
+<div class="header">
+    <div class="container clearfix">
+        <div class="logo fl">
+            <a href="/userIndex.jsp"><img src="images/logo4.png" alt=""/></a>
+        </div>
+    </div>
+</div>
 
 
-<div>
-    <h2>收藏夹</h2>
-    <form action="/collect/addshop" method="post">
+<div class="container-fluid" style="padding-left: 0px;">
+    <div class="well">
+        <form action="/collect/addshop" method="post">
+            <div class="form-group" style="width: 100%">
+                <div class="row">
+                    <c:choose>
+                        <c:when test="${ empty requestScope.mapList}">
+                                <p colspan="7" align="center"><span style="color: #0000FF">~还没有收藏商品~</span></p>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach items="${requestScope.mapList}" var="collect">
+                                <div >
+                                    <div class="col-sm-1">
+                                        <span>商品名:</span>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <span></span>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <span>商品价格:</span>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <span></span>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <span>操作:</span>
+                                    </div>
+                                </div>
+                                <div>&nbsp;</div>
+                                <div >
+                                    <div class="col-sm-2">
+                                        <a href="/collect/getpro?pd_id=${collect.pdId}">${collect.pdName}</a>
+                                    </div>
+                                    <div class="col-sm-2">
+                                            ${collect.pdPrice}元
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <a href="#" onclick="deletePro(${collect.collId},'${collect.pdName}')"><input type="button" class="btn btn-warning" value="取消收藏"></a>
+                                        <input type="submit" value="加入购物车" class="btn btn-danger">
+                                    </div>
+                                            <input type="hidden" value="${collect.pdId}" name="pdId">
+                                            <input type="hidden" value="${collect.collId}" name="collId">
 
-    <table width="600" border="1" cellspacing="0">
-        <tr>
-            <th>商品名</th>
-            <th>商品价格</th>
-            <th>操作</th>
-        </tr>
-        <c:choose>
-            <c:when test="${ empty requestScope.mapList}">
-                <tr>
-                    <td colspan="7" align="center"><span style="color: #0000FF">~还没有收藏商品~</span></td>
-                </tr>
-            </c:when>
-            <c:otherwise>
-                <c:forEach items="${requestScope.mapList}" var="collect">
-                    <tr>
-                        <td>${collect.pdName}</td>
-                        <td>${collect.pdPrice}元</td>
-                        <td>
-                            <a href="#" onclick="deletePro(${collect.collId},'${collect.pdName}')">取消收藏</a>&nbsp;&nbsp;
-                            <input type="hidden" value="${collect.pdId}" name="pdId">
-                            <input type="hidden" value="${collect.collId}" name="collId">
-                            <a href="/collect/getpro?pd_id=${collect.pdId}">详情</a>
-                            <input type="submit" value="加入购物车">
-                        </td>
-                    </tr>
-                </c:forEach>
-            </c:otherwise>
-        </c:choose>
+                                </div>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
         <script>
             /**
              * 根据购物车ID删除商品信息
@@ -116,8 +114,10 @@
             }
 
         </script>
-    </table>
-    </form>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>
