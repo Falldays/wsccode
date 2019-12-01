@@ -75,7 +75,7 @@ public class AdminController {
     @RequestMapping("add")
     public String addAdmin(Admin admin) {
         int rows = adminService.insertAdmin(admin);
-        return "redirect:/admin/info?rows=" + rows;
+        return "redirect:/admin/add_admin_result.jsp?rows=" + rows;
     }
 
     /**

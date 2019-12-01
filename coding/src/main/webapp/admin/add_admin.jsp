@@ -16,6 +16,7 @@
         <li><h3>添加管理员</h3></li>
         <li>管理员编号:<input type="text" name="adminNo" required></li>
         <li>管理员姓名:<input type="text" name="adminName" required></li>
+        <li>密码:<input type="password" name="password" required></li>
         <li>管理员性别:
             <label><input type="radio" name="sex" value="1" required>男</label>
             <label><input type="radio" name="sex" value="2" required>女</label>

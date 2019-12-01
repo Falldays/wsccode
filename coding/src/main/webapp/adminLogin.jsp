@@ -72,7 +72,7 @@
 									<div class="form-group" >
 										<label for="inputEmail3" class="col-sm-9 control-label" >用户名</label>
 										<div class="col-sm-3">
-											<input type="text" class="form-control " name="userName" id="inputEmail3" placeholder="用户名"  />
+											<input type="text" class="form-control " name="adminName" id="inputEmail3" placeholder="用户名"  />
 										</div>
 									</div>
 									<div class="form-group" >
@@ -85,7 +85,7 @@
 									<div class="form-group">
 										<div class="col-sm-offset-9 col-sm-3" >
 											<button type="submit" class="btn btn-danger">登  录</button>&nbsp;
-											<button type="button" class="btn btn-success" onclick="window.location.href = 'add_user.jsp'">注  册</button>
+											<button type="button" class="btn btn-success" onclick="window.location.href = '/admin/add_admin.jsp'">注  册</button>
 											<a href="xxx.jsp" style="color: #FFFFFF;margin-left: 50px;">忘记密码</a>
 										</div>
 									</div>
