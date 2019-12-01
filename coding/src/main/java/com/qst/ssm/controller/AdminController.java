@@ -178,5 +178,14 @@ public class AdminController {
         int rows=adminService.updateProduct(product);
         return "redirect:/product/update_product_result.jsp?rows="+rows;
     };
-
+    /**
+     * 添加商品
+     * @param product
+     * @return
+     */
+    @RequestMapping("addproduct")
+    public String addProduct(Product product){
+        int rows=adminService.insertProduct(product);
+        return "redirect:/product/add_product_result.jsp?rows="+rows;
+    };
 }
